@@ -8,7 +8,7 @@ export default function DropdownAvatar() {
   return (
     <Grid.Container justify="flex-start" gap={2}>
       <Grid>
-        <Dropdown placement="bottom-left">
+        <Dropdown placement="bottom-right">
           <Dropdown.Trigger>
             <Avatar
               bordered

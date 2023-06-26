@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { FaPlus, FaHome } from "react-icons/fa";
+import { MdLogin } from "react-icons/md";
 import { SignOutButton } from "@clerk/nextjs";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
@@ -12,7 +13,7 @@ export default function Navbar() {
   return (
     <nav className="relative border-gray-200">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <Link href="https://flowbite.com/" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <img src="./nextjs.svg" className="mr-3 h-8" alt="Site logo" />
           <span className="self-center whitespace-nowrap text-lg font-medium dark:text-white md:text-2xl">
             Resources
@@ -24,7 +25,12 @@ export default function Navbar() {
             <DropdownAvatar />
           ) : (
             <SignInButton>
-              <Button variant="secondary">Login</Button>
+              <Button variant="default">
+                <span className="flex items-center justify-center gap-2">
+                  <MdLogin className="h-5 w-5" />
+                  Login
+                </span>
+              </Button>
             </SignInButton>
           )}
         </div>
