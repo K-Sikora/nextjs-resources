@@ -5,9 +5,9 @@ import { SignOutButton } from "@clerk/nextjs";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   const user = useUser();
+
+  const { data } = api.resource.getAll.useQuery();
 
   return (
     <>
@@ -20,6 +20,9 @@ export default function Home() {
         {user.isSignedIn ? <SignOutButton /> : <SignInButton />}
 
         {user.user?.username}
+        {data?.map((i) => (
+          <div key={i.id}>{i.title}</div>
+        ))}
       </main>
     </>
   );
