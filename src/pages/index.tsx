@@ -18,7 +18,7 @@ export default function Home() {
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center justify-start gap-8 py-36 text-center text-black">
+      <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center justify-start gap-8 px-4 py-12 text-center text-black md:py-36">
         <h1 className="text-5xl font-extrabold">Next.js Resources</h1>
         <p className="px-12 text-gray-600">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
@@ -28,16 +28,18 @@ export default function Home() {
           similique sequi, eveniet facere ut? Accusantium fugiat eaque magni nam
           ducimus quis iure autem cumque aspernatur.
         </p>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           <Link href="" className={buttonVariants({ variant: "outline" })}>
             Explore resources
           </Link>
           <Link href="" className={buttonVariants()}>
-            <FaPlus />
-            Add new resource
+            <span className="flex items-center justify-center gap-1">
+              <FaPlus />
+              Add new resource
+            </span>
           </Link>
         </div>
-      </div>
+      </main>
     </>
   );
 }

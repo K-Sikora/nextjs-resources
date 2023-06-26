@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+  background-color: #fbfbfb;
+  overflow-x: hidden;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
