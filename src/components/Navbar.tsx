@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { FaPlus, FaHome } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
