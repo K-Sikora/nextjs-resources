@@ -18,6 +18,18 @@ model NextResource {
     updatedAt DateTime @updatedAt
     title String @db.VarChar(255)
     description String @db.Text
+    category Category
+    tags String
+    link String
     authorId String
     @@index([authorId])
+
+  }
+
+enum Category {
+  Tutorial
+  UI_Library
+  Package
+  Tool
 }
+

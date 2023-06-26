@@ -1,34 +1,34 @@
 import { Card, Grid, Text } from "@nextui-org/react";
 import { buttonVariants } from "~/components/ui/button";
 import Link from "next/link";
-export default function SingleCard() {
+type Props = {
+  title: string;
+  description: string;
+  link: string;
+  imgUrl: string;
+};
+export default function SingleCard(props: Props) {
+  const { title, description, link, imgUrl } = props;
   return (
     <Card css={{ p: "$6", mw: "400px" }}>
       <Card.Header>
-        <img
-          alt="nextui logo"
-          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          width="34px"
-          height="34px"
-        />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/40">
+          <img alt={title} src={imgUrl} className="h-5 w-5" />
+        </div>
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
-            <Text h4 css={{ lineHeight: "$xs" }}>
-              UI libraries
+            <Text size="$lg" h3 css={{ lineHeight: "$xs" }}>
+              {title}
             </Text>
           </Grid>
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: "$2" }}>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet
-          facilis aspernatur ad dolore nulla veritatis distinctio rerum qui!
-          Nisi.
-        </Text>
+        <Text>{description}</Text>
       </Card.Body>
       <Card.Footer>
-        <Link href="" className={buttonVariants({ variant: "secondary" })}>
-          Explore resources
+        <Link href={link} className={buttonVariants({ variant: "secondary" })}>
+          See {title}
         </Link>
       </Card.Footer>
     </Card>
