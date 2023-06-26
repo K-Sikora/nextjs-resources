@@ -1,9 +1,7 @@
 import ResourceCard from "~/components/ResourceCard";
 import { RouterOutputs, api } from "~/utils/api";
 
-type Props = {};
-
-const Resources = (props: Props) => {
+const Resources = () => {
   const { data } = api.resource.getAll.useQuery();
   type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
   return (
