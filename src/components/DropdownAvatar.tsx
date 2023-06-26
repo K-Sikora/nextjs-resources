@@ -1,10 +1,9 @@
 import { useUser } from "@clerk/nextjs";
 import { Dropdown, Avatar, Text, Grid, User } from "@nextui-org/react";
 import { SignOutButton } from "@clerk/nextjs";
-import { useClerk } from "@clerk/nextjs";
+
 export default function DropdownAvatar() {
   const user = useUser();
-  const { signOut } = useClerk();
   return (
     <Grid.Container justify="flex-start" gap={2}>
       <Grid>
@@ -36,14 +35,9 @@ export default function DropdownAvatar() {
               Help & Feedback
             </Dropdown.Item>
             <Dropdown.Item key="logout" color="error" withDivider>
-              <button
-                onClick={() => {
-                  signOut();
-                }}
-                className="flex w-full"
-              >
-                Log out
-              </button>
+              <SignOutButton>
+                <button className="flex w-full">Log out</button>
+              </SignOutButton>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
