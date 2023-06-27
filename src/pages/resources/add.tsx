@@ -17,8 +17,14 @@ import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import { Label } from "~/components/ui/label";
 import { useRouter } from "next/router";
+import ResourcePreview from "~/components/ResourcePreview";
 
 export default function AddResource() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [link, setLink] = useState("");
+
   const { toast } = useToast();
   const router = useRouter();
   const [currentlyChosen, setCurrentlyChosen] = useState("");
@@ -46,11 +52,13 @@ export default function AddResource() {
     console.log(data);
     mutate(data);
   };
-
+  const splitStringToArray = (str: string) => {
+    return str.split(",");
+  };
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-screen-xl gap-12 px-4 py-16">
+    <div className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-12 px-4 py-16 md:flex-row">
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col gap-8">
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Title</Label>
@@ -59,6 +67,9 @@ export default function AddResource() {
               placeholder="Title"
               color="default"
               {...register("title", {
+                onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  setTitle(e.target.value);
+                },
                 required: true,
                 minLength: 1,
                 maxLength: 50,
@@ -73,6 +84,9 @@ export default function AddResource() {
               placeholder="resource.com"
               color="default"
               {...register("link", {
+                onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  setLink(e.target.value);
+                },
                 required: true,
                 minLength: 1,
                 maxLength: 50,
@@ -86,6 +100,9 @@ export default function AddResource() {
               id="description"
               rows={6}
               {...register("description", {
+                onChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+                  setDescription(e.target.value);
+                },
                 required: true,
                 minLength: 5,
                 maxLength: 400,
@@ -101,6 +118,9 @@ export default function AddResource() {
               id="tags"
               rows={6}
               {...register("tags", {
+                onChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+                  setTags(e.target.value);
+                },
                 required: true,
                 minLength: 5,
                 maxLength: 100,
@@ -139,6 +159,15 @@ export default function AddResource() {
           </Button>
         </div>
       </form>
+      <div className="w-full md:w-1/2">
+        <h3 className="mb-4 text-2xl font-semibold">Preview</h3>
+        <ResourcePreview
+          description={description}
+          link={link}
+          tags={tags}
+          title={title}
+        />
+      </div>
     </div>
   );
 }

@@ -4,10 +4,12 @@ import { RouterOutputs } from "~/utils/api";
 
 import { badgeVariants } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
-type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
-
+import { useUser } from "@clerk/nextjs";
 type Props = {
-  data: ResourcesOutput;
+  title: string;
+  description: string;
+  link: string;
+  tags: string;
 };
 const splitTagsToArray = (tags: string) => {
   return tags
@@ -31,11 +33,10 @@ const splitTagsToArray = (tags: string) => {
     .filter((tag) => tag !== null);
 };
 
-const ResourceCard = (props: Props) => {
-  const { data } = props;
-
+const ResourcePreview = (props: Props) => {
+  const user = useUser();
   return (
-    <Card css={{ p: "$6" }}>
+    <Card css={{ p: "$6", shadow: "none" }}>
       <Card.Header>
         <img
           alt="logo"
@@ -47,44 +48,39 @@ const ResourceCard = (props: Props) => {
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
             <Text h4 css={{ lineHeight: "$xs" }}>
-              {data.resource.title}
+              {props.title}
             </Text>
           </Grid>
           <Grid xs={12}>
-            <Text css={{ color: "$accents8" }}>{data.resource.link}</Text>
+            <Text css={{ color: "$accents8" }}>{props.link}</Text>
           </Grid>
         </Grid.Container>
       </Card.Header>
-      <Card.Body css={{ py: "$2", justifyContent: "space-between" }}>
-        <Text>{data.resource.description}</Text>
+      <Card.Body css={{ py: "$2" }}>
+        <Text>{props.description}</Text>
         <div className="my-2 flex flex-wrap gap-2">
-          {splitTagsToArray(data.resource.tags)}
+          {splitTagsToArray(props.tags)}
         </div>
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
         <Link
-          href={data.resource.link}
+          href={props.link}
           className={buttonVariants({ variant: "default", size: "sm" })}
         >
           See details
         </Link>
-        {data.author && (
-          <h4 className="flex items-center justify-center gap-1">
-            <Link
-              className="flex items-center gap-1"
-              href={`https://github.com/${data.author.username!}`}
-            >
-              {data.author.username}
-              <img
-                className="h-7 w-7 rounded-full"
-                src={data.author.profileImageUrl}
-              />
-            </Link>
-          </h4>
-        )}
+        <h4 className="flex items-center justify-center gap-1">
+          <div className="flex items-center gap-1">
+            {user.user?.username}
+            <img
+              className="h-7 w-7 rounded-full"
+              src={user.user?.profileImageUrl}
+            />
+          </div>
+        </h4>
       </Card.Footer>
     </Card>
   );
 };
 
-export default ResourceCard;
+export default ResourcePreview;
