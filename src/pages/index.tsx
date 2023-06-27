@@ -5,7 +5,7 @@ import { SignInButton } from "@clerk/nextjs";
 import { FaPlus } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
 import { buttonVariants } from "~/components/ui/button";
-import { homepageCards } from "~/constants";
+import { homepageCards } from "~/constants/constants";
 import Link from "next/link";
 import SingleCard from "~/components/Card";
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-start gap-8 px-4 py-12 text-center text-black md:py-24">
+      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-8 px-4 py-12 text-center text-black md:py-24">
         <h1 className="text-5xl font-extrabold">Next.js Resources</h1>
         <p className="text-gray-600 md:px-12">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae

@@ -11,7 +11,7 @@ export default function Navbar() {
   const user = useUser();
   return (
     <nav className="border-2 border-gray-200">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between p-4">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <Link href="/" className="flex items-center">
           <img src="/nextjs.svg" className="mr-3 h-8" alt="Site logo" />
           <span className="self-center whitespace-nowrap text-lg font-medium dark:text-white md:text-2xl">

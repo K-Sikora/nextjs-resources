@@ -10,7 +10,7 @@ type Props = {
 export default function SingleCard(props: Props) {
   const { title, description, link, imgUrl } = props;
   return (
-    <Card css={{ p: "$6", mw: "400px" }}>
+    <Card css={{ p: "$6" }}>
       <Card.Header>
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/20">
           <img alt={title} src={imgUrl} className="h-5 w-5" />

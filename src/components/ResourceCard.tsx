@@ -10,17 +10,23 @@ type Props = {
   data: ResourcesOutput;
 };
 const splitTagsToArray = (tags: string) => {
-  return tags.split(",").map((tag) => {
-    return (
-      <Link
-        key={tag}
-        href={`/tags/${tag}`}
-        className={badgeVariants({ variant: "outline" })}
-      >
-        {tag}
-      </Link>
-    );
-  });
+  return tags
+    .replace(/\s/g, "")
+    .split(",")
+    .map((tag) => {
+      return (
+        <Link
+          key={tag}
+          href={`/tags/${tag}`}
+          className={badgeVariants({ variant: "outline" })}
+        >
+          {tag}
+        </Link>
+      );
+    });
+};
+const removeSpaceFromItem = (item: string) => {
+  return item.replace(/\s/g, "");
 };
 const ResourceCard = (props: Props) => {
   const { data } = props;

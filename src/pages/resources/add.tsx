@@ -1,8 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
 import { Loading } from "@nextui-org/react";
+import { categories } from "~/constants/categories";
+import { useToast } from "~/components/ui/use-toast";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
+import { Inputs } from "~/types/InputsType";
 import {
   Select,
   SelectContent,
@@ -14,34 +17,24 @@ import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import { Label } from "~/components/ui/label";
 import { useRouter } from "next/router";
-const categories = [
-  "Tutorial",
-  "UI_Library",
-  "Package",
-  "Tool",
-  "Starter",
-  "Other",
-];
-type Inputs = {
-  authorId: string;
-  category:
-    | "Tutorial"
-    | "UI_Library"
-    | "Package"
-    | "Tool"
-    | "Starter"
-    | "Other";
-  description: string;
-  link: string;
-  tags: string;
-  title: string;
-};
+
 export default function AddResource() {
+  const { toast } = useToast();
   const router = useRouter();
   const [currentlyChosen, setCurrentlyChosen] = useState("");
-  const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation({
+  const {
+    mutate,
+    isLoading: isLoadingAdd,
+    error,
+  } = api.resource.create.useMutation({
     onSuccess: async () => {
       await router.push("/resources");
+    },
+    onError: (error) => {
+      toast({
+        title: `An error occurred 🙁`,
+        description: error.message,
+      });
     },
   });
   const {
@@ -55,17 +48,21 @@ export default function AddResource() {
   };
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-6xl px-4 py-16">
+    <div className="mx-auto flex min-h-screen w-full max-w-screen-xl gap-12 px-4 py-16">
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex w-full flex-col gap-8 md:w-1/2">
+      <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex w-full flex-col gap-8">
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Title</Label>
             <Input
               id="title"
               placeholder="Title"
               color="default"
-              {...register("title", { required: true })}
+              {...register("title", {
+                required: true,
+                minLength: 1,
+                maxLength: 50,
+              })}
             />
           </div>
 
@@ -75,7 +72,11 @@ export default function AddResource() {
               id="link"
               placeholder="resource.com"
               color="default"
-              {...register("link", { required: true })}
+              {...register("link", {
+                required: true,
+                minLength: 1,
+                maxLength: 50,
+              })}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -84,7 +85,11 @@ export default function AddResource() {
             <Textarea
               id="description"
               rows={6}
-              {...register("description", { required: true })}
+              {...register("description", {
+                required: true,
+                minLength: 5,
+                maxLength: 400,
+              })}
               placeholder="Enter short description of this resource."
             />
           </div>
@@ -95,7 +100,11 @@ export default function AddResource() {
             <Textarea
               id="tags"
               rows={6}
-              {...register("tags", { required: true })}
+              {...register("tags", {
+                required: true,
+                minLength: 5,
+                maxLength: 100,
+              })}
               placeholder="Enter tags seperated with a comma."
             />
           </div>
@@ -116,13 +125,10 @@ export default function AddResource() {
             </SelectContent>
           </Select>
 
-          {/* <input {...register("category", { required: true })} /> */}
-          {/* {errors && <span>This field is required</span>} */}
-
           <Button
             className="flex w-full items-center justify-center gap-2 md:w-64"
             disabled={isLoadingAdd}
-            variant="outline"
+            variant="default"
             type="submit"
           >
             {isLoadingAdd ? (

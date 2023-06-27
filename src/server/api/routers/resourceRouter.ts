@@ -13,6 +13,18 @@ const filterUserInfo = (user: User) => {
     profileImageUrl: user.profileImageUrl,
   };
 };
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+import { TRPCError } from "@trpc/server";
+// Limit to 5 requests per 5 minutes
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(5, "5 m"),
+  analytics: true,
+
+  prefix: "@upstash/ratelimit",
+});
+
 export const resourceRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const resources = await ctx.prisma.nextResource.findMany({
@@ -37,7 +49,7 @@ export const resourceRouter = createTRPCRouter({
       z.object({
         description: z.string().min(5).max(400),
         title: z.string().min(1).max(50),
-        tags: z.string().min(1).max(100),
+        tags: z.string().min(5).max(100),
         link: z.string().min(1).max(50),
         category: z.enum([
           "Package",
@@ -51,6 +63,14 @@ export const resourceRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const authorid = ctx.userId;
+
+      const { success } = await ratelimit.limit(authorid);
+      if (!success)
+        throw new TRPCError({
+          code: "TOO_MANY_REQUESTS",
+          message: "Too many requests, please wait 5 minutes and try again",
+        });
+
       const resource = await ctx.prisma.nextResource.create({
         data: {
           authorId: authorid,
