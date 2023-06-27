@@ -1,6 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
-import { Input, Textarea } from "@nextui-org/react";
+import { Loading } from "@nextui-org/react";
+import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -10,6 +12,7 @@ import {
 } from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
+import { Label } from "~/components/ui/label";
 const categories = [
   "Tutorial",
   "UI_Library",
@@ -34,7 +37,7 @@ type Inputs = {
 };
 export default function AddResource() {
   const [currentlyChosen, setCurrentlyChosen] = useState("");
-  const { mutate } = api.resource.create.useMutation();
+  const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation();
   const {
     register,
     handleSubmit,
@@ -46,36 +49,49 @@ export default function AddResource() {
   };
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-6xl py-24">
+    <div className="mx-auto min-h-screen w-full max-w-6xl px-4 py-16">
       <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex w-1/3 flex-col gap-8">
-          <Input
-            bordered
-            labelPlaceholder="Title"
-            color="default"
-            {...register("title", { required: true })}
-          />
+        <div className="flex w-full flex-col gap-8 md:w-1/2">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              placeholder="Title"
+              color="default"
+              {...register("title", { required: true })}
+            />
+          </div>
 
-          <Input
-            bordered
-            labelLeft="https://"
-            placeholder="resource.com"
-            {...register("link", { required: true })}
-          />
-          <Textarea
-            bordered
-            rows={6}
-            label="Description"
-            {...register("description", { required: true })}
-            placeholder="Enter short description of this resource."
-          />
-          <Textarea
-            bordered
-            rows={6}
-            label="Tags"
-            {...register("tags", { required: true })}
-            placeholder="Enter tags seperated by commas."
-          />
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="link">Link</Label>
+            <Input
+              id="link"
+              placeholder="resource.com"
+              color="default"
+              {...register("link", { required: true })}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="description">Description</Label>
+
+            <Textarea
+              id="description"
+              rows={6}
+              {...register("description", { required: true })}
+              placeholder="Enter short description of this resource."
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="tags">Tags</Label>
+
+            <Textarea
+              id="tags"
+              rows={6}
+              {...register("tags", { required: true })}
+              placeholder="Enter tags seperated with a comma."
+            />
+          </div>
           <Select onValueChange={(e) => setCurrentlyChosen(e)}>
             <SelectTrigger
               value={currentlyChosen}
@@ -96,11 +112,19 @@ export default function AddResource() {
           {/* <input {...register("category", { required: true })} /> */}
           {/* {errors && <span>This field is required</span>} */}
 
-          <Button variant="outline" type="submit">
-            Add resource
+          <Button
+            className="flex w-full items-center justify-center gap-2 md:w-64"
+            disabled={isLoadingAdd}
+            variant="outline"
+            type="submit"
+          >
+            {isLoadingAdd ? (
+              <Loading size="sm" color="currentColor" />
+            ) : (
+              "Add resource"
+            )}
           </Button>
         </div>
-        <div className="w-2/3"></div>
       </form>
     </div>
   );
