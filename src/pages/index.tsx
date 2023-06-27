@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center justify-start gap-8 px-4 py-12 text-center text-black md:py-24">
         <h1 className="text-5xl font-extrabold">Next.js Resources</h1>
-        <p className="px-6 text-gray-600 md:px-12">
+        <p className="text-gray-600 md:px-12">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
           aliquid facere doloribus ipsa perspiciatis porro nostrum, repudiandae
           facilis impedit praesentium officia eveniet corporis libero sequi,
@@ -43,7 +43,7 @@ export default function Home() {
             </span>
           </Link>
         </div>
-        <div className="mt-36 flex flex-col gap-8">
+        <div className="mt-20 flex flex-col gap-8 md:mt-36">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {homepageCards.map((card) => (
               <SingleCard key={card.id} {...card} />

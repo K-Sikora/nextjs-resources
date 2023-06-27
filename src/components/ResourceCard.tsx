@@ -26,9 +26,15 @@ const ResourceCard = (props: Props) => {
   const { data } = props;
 
   return (
-    <Card css={{ p: "$6", mw: "400px" }}>
+    <Card css={{ p: "$6" }}>
       <Card.Header>
-        <img alt="nextui logo" src="./nextjs.svg" width="34px" height="34px" />
+        <img
+          alt="logo"
+          className="flex-shrink-0"
+          src="/nextjs.svg"
+          width="34px"
+          height="34px"
+        />
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
             <Text h4 css={{ lineHeight: "$xs" }}>
@@ -49,7 +55,7 @@ const ResourceCard = (props: Props) => {
       <Card.Footer className="flex items-center justify-between">
         <Link
           href={data.resource.link}
-          className={buttonVariants({ variant: "default" })}
+          className={buttonVariants({ variant: "default", size: "sm" })}
         >
           See details
         </Link>
