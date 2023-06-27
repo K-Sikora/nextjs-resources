@@ -57,7 +57,7 @@ const ResourceCard = (props: Props) => {
           <h4 className="flex items-center justify-center gap-1">
             <Link
               className="flex items-center gap-1"
-              href={`https://github.com/${data.author.username}`}
+              href={`https://github.com/${data.author.username!}`}
             >
               {data.author.username}
               <img

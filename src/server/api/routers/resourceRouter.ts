@@ -15,7 +15,11 @@ const filterUserInfo = (user: User) => {
 };
 export const resourceRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const resources = await ctx.prisma.nextResource.findMany();
+    const resources = await ctx.prisma.nextResource.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     const users = (
       await clerkClient.users.getUserList({
         userId: resources.map((resource) => resource.authorId),
@@ -31,10 +35,10 @@ export const resourceRouter = createTRPCRouter({
   create: privateProcedure
     .input(
       z.object({
-        description: z.string(),
-        title: z.string(),
-        tags: z.string(),
-        link: z.string(),
+        description: z.string().min(5).max(400),
+        title: z.string().min(1).max(50),
+        tags: z.string().min(1).max(100),
+        link: z.string().min(1).max(50),
         category: z.enum([
           "Package",
           "Tool",

@@ -13,6 +13,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import { Label } from "~/components/ui/label";
+import { useRouter } from "next/router";
 const categories = [
   "Tutorial",
   "UI_Library",
@@ -36,8 +37,13 @@ type Inputs = {
   title: string;
 };
 export default function AddResource() {
+  const router = useRouter();
   const [currentlyChosen, setCurrentlyChosen] = useState("");
-  const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation();
+  const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation({
+    onSuccess: () => {
+      router.push("/resources");
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -50,6 +56,7 @@ export default function AddResource() {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-6xl px-4 py-16">
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col gap-8 md:w-1/2">
           <div className="flex flex-col gap-2">
