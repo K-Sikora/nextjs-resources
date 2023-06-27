@@ -31,5 +31,7 @@ enum Category {
   UI_Library
   Package
   Tool
+  Starter
+  Other
 }
 

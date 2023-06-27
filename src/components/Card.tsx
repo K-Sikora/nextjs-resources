@@ -12,7 +12,7 @@ export default function SingleCard(props: Props) {
   return (
     <Card css={{ p: "$6", mw: "400px" }}>
       <Card.Header>
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/40">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/20">
           <img alt={title} src={imgUrl} className="h-5 w-5" />
         </div>
         <Grid.Container css={{ pl: "$6" }}>
@@ -27,7 +27,10 @@ export default function SingleCard(props: Props) {
         <Text>{description}</Text>
       </Card.Body>
       <Card.Footer>
-        <Link href={link} className={buttonVariants({ variant: "secondary" })}>
+        <Link
+          href={link}
+          className={buttonVariants({ variant: "default", size: "sm" })}
+        >
           See {title}
         </Link>
       </Card.Footer>

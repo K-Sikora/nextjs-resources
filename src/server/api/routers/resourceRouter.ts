@@ -1,7 +1,11 @@
 import { clerkClient } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 const filterUserInfo = (user: User) => {
   return {
     id: user.id,
@@ -23,4 +27,35 @@ export const resourceRouter = createTRPCRouter({
       author: users.find((user) => user.id === resource.authorId),
     }));
   }),
+
+  create: privateProcedure
+    .input(
+      z.object({
+        description: z.string(),
+        title: z.string(),
+        tags: z.string(),
+        link: z.string(),
+        category: z.enum([
+          "Package",
+          "Tool",
+          "Other",
+          "Tutorial",
+          "Starter",
+          "UI_Library",
+        ]),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const authorid = ctx.userId;
+      const resource = await ctx.prisma.nextResource.create({
+        data: {
+          authorId: authorid,
+          category: input.category,
+          description: input.description,
+          link: input.link,
+          tags: input.tags,
+          title: input.title,
+        },
+      });
+    }),
 });

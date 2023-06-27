@@ -25,10 +25,26 @@ export const homepageCards = [
   },
   {
     id: 3,
+    title: "Starters",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+    link: "/resources/starters",
+    imgUrl: "./icons/tutorial.svg",
+  },
+  {
+    id: 4,
     title: "Tutorials",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
     link: "/resources/tutorials",
+    imgUrl: "./icons/tutorial.svg",
+  },
+  {
+    id: 5,
+    title: "Other",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+    link: "/resources/other",
     imgUrl: "./icons/tutorial.svg",
   },
 ];

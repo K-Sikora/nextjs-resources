@@ -54,13 +54,18 @@ const ResourceCard = (props: Props) => {
           See details
         </Link>
         {data.author && (
-          <span className="flex items-center justify-center gap-1">
-            By: {data.author.username}
-            <img
-              className="h-7 w-7 rounded-full"
-              src={data.author.profileImageUrl}
-            />
-          </span>
+          <h4 className="flex items-center justify-center gap-1">
+            <Link
+              className="flex items-center gap-1"
+              href={`https://github.com/${data.author.username}`}
+            >
+              {data.author.username}
+              <img
+                className="h-7 w-7 rounded-full"
+                src={data.author.profileImageUrl}
+              />
+            </Link>
+          </h4>
         )}
       </Card.Footer>
     </Card>

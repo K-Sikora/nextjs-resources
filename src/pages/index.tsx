@@ -33,15 +33,18 @@ export default function Home() {
           <Link href="/resources" className={buttonVariants()}>
             Explore resources
           </Link>
-          <Link href="" className={buttonVariants({ variant: "outline" })}>
+          <Link
+            href="/resources/add"
+            className={buttonVariants({ variant: "outline" })}
+          >
             <span className="flex items-center justify-center gap-1">
               <FaPlus />
               Add new resource
             </span>
           </Link>
         </div>
-        <div className="mt-20 flex flex-col gap-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="mt-36 flex flex-col gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
             {homepageCards.map((card) => (
               <SingleCard key={card.id} {...card} />
             ))}
