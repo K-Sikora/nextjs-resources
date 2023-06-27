@@ -40,8 +40,8 @@ export default function AddResource() {
   const router = useRouter();
   const [currentlyChosen, setCurrentlyChosen] = useState("");
   const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation({
-    onSuccess: () => {
-      router.push("/resources");
+    onSuccess: async () => {
+      await router.push("/resources");
     },
   });
   const {
