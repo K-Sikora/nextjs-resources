@@ -19,6 +19,7 @@ model NextResource {
     title String @db.VarChar(255) @unique
     description String @db.Text
     category Category
+    categorySlug String
     tags String
     link String @unique
     authorId String
@@ -27,11 +28,11 @@ model NextResource {
   }
 
 enum Category {
-  Tutorial
-  UI_Library
-  Package
-  Tool
-  Starter
+  Tutorials
+  UI_Libraries
+  Packages
+  Tools
+  Starters
   Other
 }
 

@@ -1,8 +1,16 @@
 export const categories = [
-  "Tutorial",
-  "UI_Library",
-  "Package",
-  "Tool",
-  "Starter",
+  "Tutorials",
+  "UI_Libraries",
+  "Packages",
+  "Tools",
+  "Starters",
   "Other",
+];
+export const categoriesSlug = [
+  "tutorials",
+  "ui-libraries",
+  "packages",
+  "tools",
+  "starters",
+  "other",
 ];

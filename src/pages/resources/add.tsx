@@ -50,11 +50,11 @@ export default function AddResource() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
-    mutate(data);
+    const categorySlug = data.category.toLowerCase().replace("_", "-");
+    console.log(categorySlug);
+    mutate({ ...data, categorySlug });
   };
-  const splitStringToArray = (str: string) => {
-    return str.split(",");
-  };
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-12 px-4 py-16 md:flex-row">
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}

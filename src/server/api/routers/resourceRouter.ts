@@ -52,13 +52,14 @@ export const resourceRouter = createTRPCRouter({
         tags: z.string().min(5).max(100),
         link: z.string().min(1).max(50),
         category: z.enum([
-          "Package",
-          "Tool",
+          "Packages",
+          "Tools",
           "Other",
-          "Tutorial",
-          "Starter",
-          "UI_Library",
+          "Tutorials",
+          "Starters",
+          "UI_Libraries",
         ]),
+        categorySlug: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -79,6 +80,7 @@ export const resourceRouter = createTRPCRouter({
           link: input.link,
           tags: input.tags,
           title: input.title,
+          categorySlug: input.categorySlug,
         },
       });
     }),

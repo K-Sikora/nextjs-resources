@@ -1,7 +1,4 @@
 import { Card, Grid, Text } from "@nextui-org/react";
-import Link from "next/link";
-import { RouterOutputs } from "~/utils/api";
-
 import { badgeVariants } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
 import { useUser } from "@clerk/nextjs";
@@ -18,13 +15,9 @@ const splitTagsToArray = (tags: string) => {
     .map((tag) => {
       if (tag.trim() !== "") {
         return (
-          <Link
-            key={tag}
-            href={`/tags/${tag}`}
-            className={badgeVariants({ variant: "outline" })}
-          >
+          <button key={tag} className={badgeVariants({ variant: "outline" })}>
             {tag}
-          </Link>
+          </button>
         );
       } else {
         return null;
@@ -36,7 +29,7 @@ const splitTagsToArray = (tags: string) => {
 const ResourcePreview = (props: Props) => {
   const user = useUser();
   return (
-    <Card css={{ p: "$6", shadow: "none" }}>
+    <Card css={{ p: "$6", shadow: "$xs" }}>
       <Card.Header>
         <img
           alt="logo"
@@ -63,12 +56,9 @@ const ResourcePreview = (props: Props) => {
         </div>
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
-        <Link
-          href={props.link}
-          className={buttonVariants({ variant: "default", size: "sm" })}
-        >
+        <button className={buttonVariants({ variant: "default", size: "sm" })}>
           See details
-        </Link>
+        </button>
         <h4 className="flex items-center justify-center gap-1">
           <div className="flex items-center gap-1">
             {user.user?.username}
