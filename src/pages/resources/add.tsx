@@ -34,7 +34,9 @@ export default function AddResource() {
     error,
   } = api.resource.create.useMutation({
     onSuccess: async () => {
-      await router.push("/resources");
+      await router.push(
+        `/resources/${currentlyChosen.toLowerCase().replace("_", "-")}`
+      );
     },
     onError: (error) => {
       toast({

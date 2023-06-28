@@ -1,9 +1,12 @@
-import { Card, Grid, Text } from "@nextui-org/react";
+import { Card, Grid, Loading, Text } from "@nextui-org/react";
 import Link from "next/link";
-import { RouterOutputs } from "~/utils/api";
-
+import { RouterOutputs, api } from "~/utils/api";
+import { motion, AnimatePresence } from "framer-motion";
 import { badgeVariants } from "./ui/badge";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import { useUser } from "@clerk/nextjs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useEffect, useState } from "react";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
 type Props = {
@@ -32,8 +35,36 @@ const splitTagsToArray = (tags: string) => {
 };
 
 const ResourceCard = (props: Props) => {
-  const { data } = props;
+  const user = useUser();
+  const [favorite, setFavorite] = useState(false);
+  const [likeNumber, setLikeNumber] = useState(0);
+  const context = api.useContext();
+  const { data: cardData } = props;
+  const {
+    data: userLiked,
+    isLoading: isLoadingLike,
+    isFetching,
+  } = api.like.check.useQuery({
+    resourceId: cardData.resource.id,
+  });
+  const { mutate, isLoading } = api.like.create.useMutation({
+    onSuccess: (data) => {
+      console.log("likeData", data);
 
+      void context.invalidate();
+    },
+  });
+
+  useEffect(() => {
+    if (userLiked !== undefined) {
+      setFavorite(userLiked);
+    }
+  }, [userLiked]);
+  useEffect(() => {
+    if (cardData.resource.likesCount) {
+      setLikeNumber(cardData.resource.likesCount);
+    }
+  }, [cardData.resource.likesCount]);
   return (
     <Card css={{ p: "$6" }}>
       <Card.Header>
@@ -46,38 +77,82 @@ const ResourceCard = (props: Props) => {
         />
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
-            <Text h4 css={{ lineHeight: "$xs" }}>
-              {data.resource.title}
-            </Text>
+            <div className="flex w-full items-center justify-between">
+              <p>{cardData.resource.title}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-lg">{likeNumber}</p>
+
+                <button
+                  className="flex h-8 w-8 items-center justify-center rounded-md border-2 p-1"
+                  disabled={isLoading || isFetching || isLoadingLike}
+                  onClick={() => {
+                    if (user.isSignedIn) {
+                      setFavorite(!favorite);
+                      setLikeNumber((prev) => prev + (favorite ? -1 : 1));
+                      mutate({
+                        resourceId: cardData.resource.id,
+                        userId: user.user.id,
+                      });
+                    }
+                  }}
+                >
+                  <AnimatePresence>
+                    {favorite ? (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        exit={{ opacity: 0 }}
+                        key={1}
+                        className="relative"
+                      >
+                        <AiFillHeart className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        exit={{ opacity: 0 }}
+                        key={2}
+                        className="relative"
+                      >
+                        <AiOutlineHeart className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
+            </div>
           </Grid>
           <Grid xs={12}>
-            <Text css={{ color: "$accents8" }}>{data.resource.link}</Text>
+            <Text css={{ color: "$accents8" }}>{cardData.resource.link}</Text>
           </Grid>
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: "$2", justifyContent: "space-between" }}>
-        <Text>{data.resource.description}</Text>
+        <Text>{cardData.resource.description}</Text>
         <div className="my-2 flex flex-wrap gap-2">
-          {splitTagsToArray(data.resource.tags)}
+          {splitTagsToArray(cardData.resource.tags)}
         </div>
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
         <Link
-          href={data.resource.link}
+          href={cardData.resource.link}
           className={buttonVariants({ variant: "default", size: "sm" })}
         >
           See details
         </Link>
-        {data.author && (
+        {cardData.author && (
           <h4 className="flex items-center justify-center gap-1">
             <Link
               className="flex items-center gap-1"
-              href={`https://github.com/${data.author.username!}`}
+              href={`https://github.com/${cardData.author.username!}`}
             >
-              {data.author.username}
+              {cardData.author.username}
               <img
                 className="h-7 w-7 rounded-full"
-                src={data.author.profileImageUrl}
+                src={cardData.author.profileImageUrl}
               />
             </Link>
           </h4>

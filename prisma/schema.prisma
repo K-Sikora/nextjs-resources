@@ -13,19 +13,30 @@ generator client {
 
 
 model NextResource {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    title String @db.VarChar(255) @unique
-    description String @db.Text
-    category Category
-    categorySlug String
-    tags String
-    link String @unique
-    authorId String
-    @@index([authorId])
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  title       String    @db.VarChar(255) @unique
+  description String    @db.Text
+  category    Category
+  categorySlug String
+  tags        String
+  link        String    @unique
+  authorId    String
+  likes       Like[]
+  likesCount  Int       @default(0)
+  @@index([authorId])
+}
 
-  }
+model Like {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  resourceId String
+  userId     String
+  resource   NextResource @relation(fields: [resourceId], references: [id])
+  @@index([resourceId])
+  @@index([userId])
+}
 
 enum Category {
   Tutorials

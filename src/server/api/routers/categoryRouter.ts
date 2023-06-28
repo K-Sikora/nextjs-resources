@@ -29,6 +29,9 @@ export const categoryRouter = createTRPCRouter({
         where: {
           categorySlug: input.category,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
       });
       const users = (
         await clerkClient.users.getUserList({
