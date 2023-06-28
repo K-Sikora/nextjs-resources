@@ -29,7 +29,7 @@ export const resourceRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const resources = await ctx.prisma.nextResource.findMany({
       orderBy: {
-        createdAt: "desc",
+        likesCount: "desc",
       },
     });
     const users = (

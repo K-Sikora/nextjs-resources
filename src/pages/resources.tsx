@@ -12,11 +12,14 @@ const Resources = () => {
 
   if (isLoading && user.isLoaded) {
     return (
-      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-12 md:grid-cols-2 md:py-24 xl:grid-cols-3">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <ResourcesLoading key={index} />
-        ))}
-      </div>
+      <>
+        <CategoriesNav />
+        <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-6 md:grid-cols-2 md:py-12 xl:grid-cols-3">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <ResourcesLoading key={index} />
+          ))}
+        </div>
+      </>
     );
   }
 
