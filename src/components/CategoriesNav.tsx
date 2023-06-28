@@ -17,7 +17,7 @@ const CategoriesNav = () => {
       <NavigationMenu>
         <NavigationMenuList className="flex flex-wrap items-start justify-start gap-4">
           {homepageCards.map((card) => (
-            <NavigationMenuItem>
+            <NavigationMenuItem key={card.id}>
               <NavigationMenuTrigger>{card.title}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid h-96 w-64 grid-cols-1 gap-4 p-4 text-white md:w-[768px] md:grid-cols-2">
