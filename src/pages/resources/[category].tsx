@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import ResourcesLoading from "~/components/ResourcesLoading";
 import ResourceCard from "~/components/ResourceCard";
 import Head from "next/head";
+import CategoriesNav from "~/components/CategoriesNav";
 
 const CategoryPage = () => {
   const user = useUser();
@@ -31,7 +32,7 @@ const CategoryPage = () => {
 
   if (isLoading && user.isLoaded) {
     return (
-      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-12 md:grid-cols-2 md:py-24 xl:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-6 md:grid-cols-2 md:py-12 xl:grid-cols-3">
         {Array.from({ length: 12 }).map((_, index) => (
           <ResourcesLoading key={index} />
         ))}
@@ -48,6 +49,8 @@ const CategoryPage = () => {
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CategoriesNav />
+
       <main className="min-h-screen">
         <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-12 md:grid-cols-2 md:py-24 xl:grid-cols-3">
           {data?.map((i: ResourcesOutput) => (

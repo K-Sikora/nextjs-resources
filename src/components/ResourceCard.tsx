@@ -93,6 +93,7 @@ const ResourceCard = (props: Props) => {
                         resourceId: cardData.resource.id,
                         userId: user.user.id,
                       });
+                    } else {
                     }
                   }}
                 >
