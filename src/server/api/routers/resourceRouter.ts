@@ -16,14 +16,15 @@ const filterUserInfo = (user: User) => {
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { TRPCError } from "@trpc/server";
-// Limit to 100 requests per 10 minutes
+// Limit to 10 requests per 5 minutes
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(100, "10 m"),
+  limiter: Ratelimit.slidingWindow(10, "5 m"),
   analytics: true,
 
   prefix: "@upstash/ratelimit",
 });
+// Limit to 100 requests per 5 minutes
 
 export const resourceRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
@@ -43,6 +44,38 @@ export const resourceRouter = createTRPCRouter({
       author: users.find((user) => user.id === resource.authorId),
     }));
   }),
+
+  getByName: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { name } = input;
+
+      // const authorid = ctx.userId
+      // const { success } = await ratelimit.limit(authorid);
+      const resources = await ctx.prisma.nextResource.findMany({
+        where: {
+          OR: [
+            { title: { contains: name } },
+            { tags: { contains: name } },
+            { description: { contains: name } },
+          ],
+        },
+        orderBy: {
+          likesCount: "desc",
+        },
+      });
+
+      const users = (
+        await clerkClient.users.getUserList({
+          userId: resources.map((resource) => resource.authorId),
+        })
+      ).map(filterUserInfo);
+
+      return resources.map((resource) => ({
+        resource,
+        author: users.find((user) => user.id === resource.authorId),
+      }));
+    }),
 
   create: privateProcedure
     .input(

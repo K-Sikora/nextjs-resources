@@ -4,8 +4,9 @@ import { RouterOutputs, api } from "~/utils/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { badgeVariants } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
-import { useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useToast } from "./ui/use-toast";
 import { useEffect, useState } from "react";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
@@ -36,6 +37,8 @@ const splitTagsToArray = (tags: string) => {
 };
 
 const ResourceCard = (props: Props) => {
+  const { toast } = useToast();
+
   const user = useUser();
   const [favorite, setFavorite] = useState(false);
   const [likeNumber, setLikeNumber] = useState(0);
@@ -88,7 +91,6 @@ const ResourceCard = (props: Props) => {
               <p>{cardData.resource.title}</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg">{likeNumber}</p>
-
                 <button
                   className="flex h-8 w-8 items-center justify-center rounded-md border-2 p-1"
                   disabled={isLoading || isFetching || isLoadingLike}
@@ -101,6 +103,10 @@ const ResourceCard = (props: Props) => {
                         userId: user.user.id,
                       });
                     } else {
+                      toast({
+                        description:
+                          "You need to be signed in to like a resource",
+                      });
                     }
                   }}
                 >

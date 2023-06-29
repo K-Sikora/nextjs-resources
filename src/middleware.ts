@@ -7,9 +7,9 @@ export default authMiddleware({
     "/api/(.*)",
     /^\/resources\/(?!add).*$/, // Exclude "/resources/add" route
     "/user/(.*)",
+    "/search",
   ],
 });
-
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

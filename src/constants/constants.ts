@@ -37,7 +37,7 @@ export const homepageCards = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
     link: "/resources/starters",
-    imgUrl: "/icons/tutorial.svg",
+    imgUrl: "/icons/starter.svg",
     slug: "starters",
 
     coverImgUrl: "/categories/starters.jpg",
@@ -59,7 +59,7 @@ export const homepageCards = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
     link: "/resources/other",
-    imgUrl: "/icons/tutorial.svg",
+    imgUrl: "/icons/other.svg",
     slug: "other",
 
     coverImgUrl: "/categories/other.jpg",

@@ -67,7 +67,6 @@ export default function AddResource() {
             <Input
               id="title"
               placeholder="Title"
-              color="default"
               {...register("title", {
                 onChange(e: React.ChangeEvent<HTMLInputElement>) {
                   setTitle(e.target.value);
@@ -84,7 +83,6 @@ export default function AddResource() {
             <Input
               id="link"
               placeholder="resource.com"
-              color="default"
               {...register("link", {
                 onChange(e: React.ChangeEvent<HTMLInputElement>) {
                   setLink(e.target.value);

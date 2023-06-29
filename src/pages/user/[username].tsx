@@ -49,7 +49,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
               <AiFillHeart /> Liked: {userStats?.likeCount}
             </h4>
             <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
-              <IoMdCreate /> Created: {userStats?.createdCount}
+              <IoMdCreate /> Added: {userStats?.createdCount}
             </h4>
             <Link href={`https://github.com/${data.username}`}>
               <AiFillGithub size={32} />
@@ -58,9 +58,9 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
         </div>
         <div className="col-span-4 flex flex-col gap-12 rounded-lg md:grid md:grid-cols-2 md:gap-4 md:border md:p-4">
           <div className="rounded-lg border md:border-none">
-            <h3 className="flex items-center gap-2 p-4 text-xl font-medium md:p-0">
+            <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
               Favourite resources
-              <AiFillHeart className="text-slate-600" size={24} />
+              <AiFillHeart className="text-slate-600" size={20} />
             </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingLikedResources && user.isLoaded
@@ -75,16 +75,14 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
                     />
                   ))}
               {likedResourcesData && likedResourcesData.length <= 0 && (
-                <div className="text-center text-xl">
-                  Looks like it&apos;s empty 😞
-                </div>
+                <div className="mb-4 text-center text-lg">Nothing found 😞</div>
               )}
             </div>
           </div>
           <div className="rounded-lg border md:border-none">
-            <h3 className="flex items-center gap-2 p-4 text-xl font-medium md:p-0">
-              Created resources
-              <IoMdCreate className="text-slate-600" />
+            <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
+              Added resources
+              <IoMdCreate className="text-slate-600" size={20} />
             </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingCreatedResources && user.isLoaded
@@ -99,9 +97,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
                     />
                   ))}
               {createdResourcesData && createdResourcesData.length <= 0 && (
-                <div className="text-center text-xl">
-                  Looks like it&apos;s empty 😞
-                </div>
+                <div className="mb-4 text-center text-lg">Nothing found 😞</div>
               )}
             </div>
           </div>

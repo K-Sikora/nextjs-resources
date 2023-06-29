@@ -16,10 +16,10 @@ const filterUserInfo = (user: User) => {
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { TRPCError } from "@trpc/server";
-// limit to 5 requests per 5 minutes
+// limit to 100 requests per 5 minutes
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(5, "5 m"),
+  limiter: Ratelimit.slidingWindow(100, "5 m"),
   analytics: true,
 
   prefix: "@upstash/ratelimit",
@@ -52,7 +52,7 @@ export const likeRouter = createTRPCRouter({
       if (!resource) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Zasób o podanym identyfikatorze nie istnieje",
+          message: "Resource not found",
         });
       }
 
@@ -109,17 +109,21 @@ export const likeRouter = createTRPCRouter({
         return { success: true, liked: true, id: resourceId };
       }
     }),
-  check: privateProcedure
+  check: publicProcedure
     .input(
       z.object({
         resourceId: z.string(),
       })
     )
     .query(async ({ ctx, input }) => {
+      if (!ctx.userId) {
+        return false; // user not logged in
+      }
+
       const userId = ctx.userId;
       const resourceId = input.resourceId;
 
-      // check if there's a like for user
+      // check if there's a like for the user
       const likedResource = await ctx.prisma.like.findFirst({
         where: {
           userId,
