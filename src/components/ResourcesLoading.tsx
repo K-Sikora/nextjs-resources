@@ -6,7 +6,7 @@ import { buttonVariants } from "./ui/button";
 
 const ResourceCard = () => {
   return (
-    <Card css={{ p: "$6" }}>
+    <Card css={{ p: "$6", shadow: "none" }}>
       <Card.Header>
         <img
           alt="logo"

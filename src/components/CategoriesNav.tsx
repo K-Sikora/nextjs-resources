@@ -19,7 +19,7 @@ import { api } from "~/utils/api";
 const CategoriesNav = () => {
   const { data } = api.resource.getAll.useQuery();
   return (
-    <div className="mx-auto flex w-full max-w-7xl items-center justify-start px-4 py-12">
+    <div className="mx-auto flex w-full max-w-screen-xl items-center justify-start px-4 py-12">
       <NavigationMenu>
         <NavigationMenuList className="flex flex-wrap items-start justify-start gap-4 md:gap-0">
           <NavigationMenuItem>

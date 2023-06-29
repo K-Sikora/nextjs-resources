@@ -57,7 +57,7 @@ const CategoryPage = () => {
       <main className="min-h-screen">
         <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-6 md:grid-cols-2 md:py-12 xl:grid-cols-3">
           {data?.map((i: ResourcesOutput) => (
-            <ResourceCard key={i.resource.id} data={i} />
+            <ResourceCard key={i.resource.id} data={i} shadowEnabled={true} />
           ))}
         </div>
       </main>

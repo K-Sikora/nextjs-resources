@@ -11,6 +11,7 @@ type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
 type Props = {
   data: ResourcesOutput;
+  shadowEnabled: boolean;
 };
 const splitTagsToArray = (tags: string) => {
   return tags
@@ -66,7 +67,7 @@ const ResourceCard = (props: Props) => {
     }
   }, [cardData.resource.likesCount]);
   return (
-    <Card css={{ p: "$6" }}>
+    <Card css={{ p: "$4", shadow: props.shadowEnabled ? "" : "none" }}>
       <Card.Header>
         <img
           alt="logo"
@@ -148,7 +149,7 @@ const ResourceCard = (props: Props) => {
           <h4 className="flex items-center justify-center gap-1">
             <Link
               className="flex items-center gap-1"
-              href={`https://github.com/${cardData.author.username!}`}
+              href={`/user/${cardData.author.username!}`}
             >
               {cardData.author.username}
               <img

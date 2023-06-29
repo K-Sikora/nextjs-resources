@@ -28,7 +28,10 @@ export default function DropdownAvatar() {
               </Text>
             </Dropdown.Item>
             <Dropdown.Item css={{ p: "$0" }} key="my_profile" withDivider>
-              <Link className="block w-full px-2 py-1" href="/resources/add">
+              <Link
+                className="block w-full px-2 py-1"
+                href={`/user/${user.user?.username || ""}`}
+              >
                 My Profile
               </Link>
             </Dropdown.Item>

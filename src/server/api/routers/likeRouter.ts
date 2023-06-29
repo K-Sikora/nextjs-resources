@@ -129,4 +129,55 @@ export const likeRouter = createTRPCRouter({
 
       return !!likedResource;
     }),
+
+  getLikedByUser: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userId } = input;
+
+      const likedResources = await ctx.prisma.like.findMany({
+        where: {
+          userId,
+        },
+        include: {
+          resource: true,
+        },
+        take: 10,
+      });
+
+      const resources = likedResources.map((like) => like.resource);
+
+      const users = (
+        await clerkClient.users.getUserList({
+          userId: resources.map((resource) => resource.authorId),
+        })
+      ).map(filterUserInfo);
+
+      return resources.map((resource) => ({
+        resource,
+        author: users.find((user) => user.id === resource.authorId),
+      }));
+    }),
+  getUserStats: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userId } = input;
+
+      const likeCount = await ctx.prisma.like.count({
+        where: {
+          userId,
+        },
+      });
+
+      const createdCount = await ctx.prisma.nextResource.count({
+        where: {
+          authorId: userId,
+        },
+      });
+
+      return {
+        likeCount,
+        createdCount,
+      };
+    }),
 });
