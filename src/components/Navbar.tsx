@@ -14,11 +14,8 @@ export default function Navbar() {
   return (
     <nav className="relative border-2 border-gray-200">
       <div className="mx-auto flex h-20 max-w-screen-xl flex-wrap items-center justify-between px-4 md:grid md:grid-cols-5">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex max-w-fit items-center">
           <img src="/nextjs.svg" className="mr-3 h-8" alt="Site logo" />
-          <span className="self-center whitespace-nowrap text-lg font-medium dark:text-white md:text-2xl">
-            R
-          </span>
         </Link>
         <SearchBar />
         <div

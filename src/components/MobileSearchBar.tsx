@@ -51,6 +51,7 @@ const MobileSearchBar = () => {
                   <FaSearch className="text-white" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => setMobileSearchVisible(false)}
                   className="absolute right-12 top-1/2 flex h-full w-8 -translate-y-1/2 items-center justify-center"
                 >

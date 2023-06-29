@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import Navbar from "~/components/Navbar";
 import { Toaster } from "~/components/ui/toaster";
+import Footer from "~/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const MyApp: AppType = ({ Component, pageProps }) => {
@@ -15,6 +16,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <Component {...pageProps} />
         <Toaster />
       </div>
+      <Footer />
     </ClerkProvider>
   );
 };
