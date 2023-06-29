@@ -34,20 +34,21 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
   return (
     <>
       <Head>
-        <title>{username} - Profile page</title>
+        {user.isLoaded && <title>Profile page - {username}</title>}
+        <meta name="description" content="Next.js Resources" />
       </Head>
-      <main className="mx-auto grid min-h-screen w-full max-w-screen-xl grid-cols-5 gap-8 px-4 py-12 text-slate-800 md:py-24">
-        <div className="sticky left-0 top-4 col-span-1 flex h-96 flex-col items-center justify-center gap-4 rounded-lg border text-center">
+      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-4 px-4 py-12 text-slate-800 md:grid md:grid-cols-5 md:py-24 lg:gap-8">
+        <div className="col-span-1 flex flex-col items-center justify-center gap-4 rounded-lg border py-4 text-center md:sticky md:left-0 md:top-4 md:h-96 md:py-0">
           <img
             src={data.profileImageUrl}
-            className="w-36 rounded-full border-2 border-slate-300"
+            className="w-36 rounded-full border-2 border-slate-300 sm:w-24 lg:w-36"
           />
           <h2 className="text-xl font-semibold">{data.username}</h2>
           <div className="flex flex-col items-center gap-2">
-            <h4 className="flex items-center justify-center gap-1 text-lg font-medium">
+            <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
               <AiFillHeart /> Liked: {userStats?.likeCount}
             </h4>
-            <h4 className="flex items-center justify-center gap-1 text-lg font-medium">
+            <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
               <IoMdCreate /> Created: {userStats?.createdCount}
             </h4>
             <Link href={`https://github.com/${data.username}`}>
@@ -55,9 +56,12 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
             </Link>
           </div>
         </div>
-        <div className="col-span-4 grid grid-cols-2 gap-4 rounded-lg border p-4">
-          <div>
-            <h3 className="text-xl font-medium">Favourite resources</h3>
+        <div className="col-span-4 flex flex-col gap-12 rounded-lg md:grid md:grid-cols-2 md:gap-4 md:border md:p-4">
+          <div className="rounded-lg border md:border-none">
+            <h3 className="flex items-center gap-2 p-4 text-xl font-medium md:p-0">
+              Favourite resources
+              <AiFillHeart className="text-slate-600" size={24} />
+            </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingLikedResources && user.isLoaded
                 ? Array.from({ length: 12 }).map((_, index) => (
@@ -77,8 +81,11 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
               )}
             </div>
           </div>
-          <div>
-            <h3 className="text-xl font-medium">Created resources</h3>
+          <div className="rounded-lg border md:border-none">
+            <h3 className="flex items-center gap-2 p-4 text-xl font-medium md:p-0">
+              Created resources
+              <IoMdCreate className="text-slate-600" />
+            </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingCreatedResources && user.isLoaded
                 ? Array.from({ length: 12 }).map((_, index) => (

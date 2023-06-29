@@ -67,7 +67,13 @@ const ResourceCard = (props: Props) => {
     }
   }, [cardData.resource.likesCount]);
   return (
-    <Card css={{ p: "$4", shadow: props.shadowEnabled ? "" : "none" }}>
+    <Card
+      css={{
+        p: "$4",
+        shadow: props.shadowEnabled ? "" : "none",
+        dropShadow: props.shadowEnabled ? "$md" : "none",
+      }}
+    >
       <Card.Header>
         <img
           alt="logo"
