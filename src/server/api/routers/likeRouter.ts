@@ -150,7 +150,6 @@ export const likeRouter = createTRPCRouter({
             },
           },
         },
-        take: 10,
       });
 
       const resources = likedResources.map((like) => like.resource);

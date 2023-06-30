@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
               <img src="/logo.svg" className="mr-3 w-10" alt="Site logo" />
-              <span className="text-lg font-medium">Next.js Resources</span>
+              <span className="text-lg">Next.js Resources</span>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
@@ -20,12 +20,15 @@ const Footer = () => {
               </h2>
               <ul className="font-medium text-slate-800">
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
+                  <Link href="/" className="text-sm font-light hover:underline">
                     Homepage
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources" className="hover:underline">
+                  <Link
+                    href="/resources"
+                    className="text-sm font-light hover:underline"
+                  >
                     Resources
                   </Link>
                 </li>
@@ -40,7 +43,7 @@ const Footer = () => {
                   <Link
                     target="_blank"
                     href="https://github.com/K-Sikora/nextjs-resources"
-                    className="hover:underline "
+                    className="text-sm font-light hover:underline "
                   >
                     GitHub
                   </Link>
@@ -53,12 +56,12 @@ const Footer = () => {
               </h2>
               <ul className="font-medium text-slate-800">
                 <li className="mb-4">
-                  <Link href="#" className="hover:underline">
+                  <Link href="#" className="text-sm font-light hover:underline">
                     Terms &amp; Conditions
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:underline">
+                  <Link href="#" className="text-sm font-light hover:underline">
                     Contact
                   </Link>
                 </li>
@@ -70,7 +73,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center">
             © 2023{" "}
-            <Link href="/" className="hover:underline">
+            <Link href="/" className="text-sm hover:underline">
               Next.js Resources
             </Link>
           </span>

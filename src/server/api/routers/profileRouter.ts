@@ -43,7 +43,6 @@ export const profileRouter = createTRPCRouter({
         orderBy: {
           createdAt: "asc",
         },
-        take: 10,
       });
 
       const users = (

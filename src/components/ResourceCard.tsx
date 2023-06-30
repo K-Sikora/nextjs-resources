@@ -5,35 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { badgeVariants } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import { SignInButton, useUser } from "@clerk/nextjs";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useToast } from "./ui/use-toast";
 import { useEffect, useState } from "react";
+import { EditMenu } from "./EditMenu";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
 type Props = {
   data: ResourcesOutput;
   shadowEnabled: boolean;
-};
-const splitTagsToArray = (tags: string) => {
-  return tags
-    .replace(/\s/g, "")
-    .split(",")
-    .map((tag) => {
-      if (tag.trim() !== "") {
-        return (
-          <Link
-            key={tag}
-            href={`/tags/${tag}`}
-            className={badgeVariants({ variant: "outline" })}
-          >
-            {tag}
-          </Link>
-        );
-      } else {
-        return null;
-      }
-    })
-    .filter((tag) => tag !== null);
 };
 
 const ResourceCard = (props: Props) => {
@@ -43,6 +24,7 @@ const ResourceCard = (props: Props) => {
   const [favorite, setFavorite] = useState(false);
   const [likeNumber, setLikeNumber] = useState(0);
   const context = api.useContext();
+
   const { data: cardData } = props;
   const {
     data: userLiked,
@@ -150,7 +132,7 @@ const ResourceCard = (props: Props) => {
           {cardData.resource.tags?.map((tag) => (
             <Link
               key={tag.id}
-              href={`/tags/${tag.name}`}
+              href={`/tag/${tag.name}`}
               className={badgeVariants({ variant: "outline" })}
             >
               {tag.name}
@@ -159,12 +141,17 @@ const ResourceCard = (props: Props) => {
         </div>
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
-        <Link
-          href={cardData.resource.link}
-          className={buttonVariants({ variant: "default", size: "sm" })}
-        >
-          See details
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/resource/${cardData.resource.link}`}
+            className={buttonVariants({ variant: "default", size: "sm" })}
+          >
+            See details
+          </Link>
+          {user.isSignedIn && user.user.id === cardData.author?.id && (
+            <EditMenu cardId={cardData.resource.id} />
+          )}
+        </div>
         {cardData.author && (
           <h4 className="flex items-center justify-center gap-1">
             <Link

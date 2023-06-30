@@ -59,8 +59,7 @@ export default function AddResource() {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-12 px-4 py-16 md:flex-row">
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form className="w-full md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full md:w-1/2" onSubmit={void handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col gap-8">
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Title</Label>

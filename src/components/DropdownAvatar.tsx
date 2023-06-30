@@ -11,7 +11,7 @@ export default function DropdownAvatar() {
     <Grid.Container css={{ p: "$0" }} justify="flex-end" gap={2}>
       <Grid>
         <Dropdown placement="bottom-right">
-          <Dropdown.Trigger>
+          <Dropdown.Trigger css={{ zIndex: 10 }}>
             <Avatar
               bordered
               size="lg"
