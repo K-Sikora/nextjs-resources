@@ -37,6 +37,9 @@ export const profileRouter = createTRPCRouter({
         where: {
           authorId: userId,
         },
+        include: {
+          tags: true,
+        },
         orderBy: {
           createdAt: "asc",
         },
@@ -49,9 +52,11 @@ export const profileRouter = createTRPCRouter({
         })
       ).map(filterUserInfo);
 
-      return resources.map((resource) => ({
-        resource,
-        author: users.find((user) => user.id === resource.authorId),
-      }));
+      const resourcesWithAuthors = resources.map((resource) => {
+        const author = users.find((user) => user.id === resource.authorId);
+        return { resource, author };
+      });
+
+      return resourcesWithAuthors;
     }),
 });

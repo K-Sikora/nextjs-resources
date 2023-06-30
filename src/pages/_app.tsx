@@ -15,8 +15,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <Navbar />
         <Component {...pageProps} />
         <Toaster />
+        <Footer />
       </div>
-      <Footer />
     </ClerkProvider>
   );
 };

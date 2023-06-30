@@ -81,7 +81,7 @@ const ResourceCard = (props: Props) => {
         <img
           alt="logo"
           className="flex-shrink-0"
-          src="/nextjs.svg"
+          src="/logo.svg"
           width="34px"
           height="34px"
         />
@@ -147,7 +147,15 @@ const ResourceCard = (props: Props) => {
       <Card.Body css={{ py: "$2", justifyContent: "space-between" }}>
         <Text>{cardData.resource.description}</Text>
         <div className="my-2 flex flex-wrap gap-2">
-          {splitTagsToArray(cardData.resource.tags)}
+          {cardData.resource.tags?.map((tag) => (
+            <Link
+              key={tag.id}
+              href={`/tags/${tag.name}`}
+              className={badgeVariants({ variant: "outline" })}
+            >
+              {tag.name}
+            </Link>
+          ))}
         </div>
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">

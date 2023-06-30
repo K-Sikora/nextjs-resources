@@ -144,7 +144,11 @@ export const likeRouter = createTRPCRouter({
           userId,
         },
         include: {
-          resource: true,
+          resource: {
+            include: {
+              tags: true,
+            },
+          },
         },
         take: 10,
       });
@@ -157,10 +161,12 @@ export const likeRouter = createTRPCRouter({
         })
       ).map(filterUserInfo);
 
-      return resources.map((resource) => ({
-        resource,
-        author: users.find((user) => user.id === resource.authorId),
-      }));
+      const resourcesWithAuthors = resources.map((resource) => {
+        const author = users.find((user) => user.id === resource.authorId);
+        return { resource, author };
+      });
+
+      return resourcesWithAuthors;
     }),
   getUserStats: publicProcedure
     .input(z.object({ userId: z.string() }))

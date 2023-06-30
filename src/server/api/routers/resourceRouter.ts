@@ -24,15 +24,18 @@ const ratelimit = new Ratelimit({
 
   prefix: "@upstash/ratelimit",
 });
-// Limit to 100 requests per 5 minutes
 
 export const resourceRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const resources = await ctx.prisma.nextResource.findMany({
+      include: {
+        tags: true,
+      },
       orderBy: {
         likesCount: "desc",
       },
     });
+
     const users = (
       await clerkClient.users.getUserList({
         userId: resources.map((resource) => resource.authorId),
@@ -50,15 +53,16 @@ export const resourceRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { name } = input;
 
-      // const authorid = ctx.userId
-      // const { success } = await ratelimit.limit(authorid);
       const resources = await ctx.prisma.nextResource.findMany({
         where: {
           OR: [
             { title: { contains: name } },
-            { tags: { contains: name } },
+            { tags: { some: { name: { contains: name } } } },
             { description: { contains: name } },
           ],
+        },
+        include: {
+          tags: true,
         },
         orderBy: {
           likesCount: "desc",
@@ -71,10 +75,12 @@ export const resourceRouter = createTRPCRouter({
         })
       ).map(filterUserInfo);
 
-      return resources.map((resource) => ({
-        resource,
-        author: users.find((user) => user.id === resource.authorId),
-      }));
+      const resourcesWithAuthors = resources.map((resource) => {
+        const author = users.find((user) => user.id === resource.authorId);
+        return { resource, author };
+      });
+
+      return resourcesWithAuthors;
     }),
 
   create: privateProcedure
@@ -96,25 +102,37 @@ export const resourceRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const authorid = ctx.userId;
+      const authorId = ctx.userId;
 
-      const { success } = await ratelimit.limit(authorid);
+      const { success } = await ratelimit.limit(authorId);
       if (!success)
         throw new TRPCError({
           code: "TOO_MANY_REQUESTS",
           message: "Too many requests, please wait 5 minutes and try again",
         });
 
+      const tagArray = input.tags.split(",").map((tag) => tag.trim());
+
       const resource = await ctx.prisma.nextResource.create({
         data: {
-          authorId: authorid,
+          authorId: authorId,
           category: input.category,
           description: input.description,
           link: input.link,
-          tags: input.tags,
           title: input.title,
           categorySlug: input.categorySlug,
+          tags: {
+            connectOrCreate: tagArray.map((tagName) => ({
+              where: { name: tagName },
+              create: { name: tagName },
+            })),
+          },
+        },
+        include: {
+          tags: true,
         },
       });
+
+      return resource;
     }),
 });

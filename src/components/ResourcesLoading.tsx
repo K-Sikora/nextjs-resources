@@ -11,7 +11,7 @@ const ResourceCard = () => {
         <img
           alt="logo"
           className="flex-shrink-0"
-          src="/nextjs.svg"
+          src="/logo.svg"
           width="34px"
           height="34px"
         />

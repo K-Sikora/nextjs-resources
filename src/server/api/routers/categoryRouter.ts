@@ -29,23 +29,32 @@ export const categoryRouter = createTRPCRouter({
         where: {
           categorySlug: input.category,
         },
+        include: {
+          tags: true,
+        },
         orderBy: {
           createdAt: "desc",
         },
       });
+
       const users = (
         await clerkClient.users.getUserList({
           userId: resources.map((resource) => resource.authorId),
         })
       ).map(filterUserInfo);
-      if (!resources)
+
+      if (!resources || resources.length === 0) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "No resources found",
         });
-      return resources.map((resource) => ({
-        resource,
-        author: users.find((user) => user.id === resource.authorId),
-      }));
+      }
+
+      const resourcesWithAuthors = resources.map((resource) => {
+        const author = users.find((user) => user.id === resource.authorId);
+        return { resource, author };
+      });
+
+      return resourcesWithAuthors;
     }),
 });

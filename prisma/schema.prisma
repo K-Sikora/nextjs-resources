@@ -20,7 +20,7 @@ model NextResource {
   description String    @db.Text
   category    Category
   categorySlug String
-  tags        String
+  tags        Tag[]
   link        String    @unique
   authorId    String
   likes       Like[]
@@ -28,15 +28,24 @@ model NextResource {
   @@index([authorId])
 }
 
+model Tag {
+  id          String         @id @default(cuid())
+  name        String         @unique
+  resources   NextResource[] 
+}
+
 model Like {
   id         String    @id @default(cuid())
   createdAt  DateTime  @default(now())
   resourceId String
   userId     String
-  resource   NextResource @relation(fields: [resourceId], references: [id])
+  resource   NextResource @relation(fields: [resourceId], references: [id], onDelete: Cascade) 
   @@index([resourceId])
   @@index([userId])
 }
+
+
+
 
 enum Category {
   Tutorials
