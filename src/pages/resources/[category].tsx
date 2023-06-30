@@ -14,15 +14,18 @@ const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
   const { data, isLoading, isError } =
-    api.category.getResourceByCategory.useQuery({
-      category: category as
-        | "other"
-        | "packages"
-        | "tools"
-        | "tutorials"
-        | "starters"
-        | "ui-libraries",
-    });
+    api.category.getResourceByCategory.useQuery(
+      {
+        category: category as
+          | "other"
+          | "packages"
+          | "tools"
+          | "tutorials"
+          | "starters"
+          | "ui-libraries",
+      },
+      { enabled: !!category }
+    );
   type ResourcesOutput =
     RouterOutputs["category"]["getResourceByCategory"][number];
 

@@ -1,9 +1,12 @@
-import { FiEdit } from "react-icons/fi";
+import { MdEditNote } from "react-icons/md";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { categories } from "~/constants/categories";
 import { useEffect, useState } from "react";
 import { Inputs } from "~/types/InputsType";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+
 import { Label } from "./ui/label";
 import {
   AlertDialog,
@@ -39,7 +42,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FaTrash } from "react-icons/fa";
 import { Loading } from "@nextui-org/react";
 import { useToast } from "./ui/use-toast";
-import { DeleteAlert } from "./DeleteAlert";
 import { useRouter } from "next/router";
 type Props = {
   cardId: string;
@@ -73,7 +75,6 @@ export function EditMenu(props: Props) {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const categorySlug = data.category.toLowerCase().replace("_", "-");
     console.log(categorySlug);
     mutate({ ...data, categorySlug, resourceId: props.cardId });
@@ -82,56 +83,75 @@ export function EditMenu(props: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="flex w-5 items-center justify-center">
-          <FiEdit className="h-full w-full" />
-        </button>
+        <Button
+          variant="default"
+          size="icon"
+          className="flex h-8 w-8 shrink-0 items-center justify-center"
+        >
+          <MdEditNote className="h-full w-full p-1 text-white" />
+        </Button>
       </SheetTrigger>
-      <SheetContent className="z-50 p-3 md:p-6">
+      <SheetContent className={`z-50 p-3 md:p-6 ${inter.className}`}>
         <SheetHeader>
           <SheetTitle>Edit resource</SheetTitle>
           <SheetDescription>
             Save changes after you&apos;re done editing this resource.
           </SheetDescription>
         </SheetHeader>
-        <form
-          onSubmit={void handleSubmit(onSubmit)}
-          className="grid gap-4 py-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-right text-xs md:text-sm">
               Title
             </Label>
             <Input
               id="title"
               defaultValue={data?.resource.title}
-              {...register("title")}
+              {...register("title", {
+                required: true,
+                minLength: 1,
+                maxLength: 50,
+              })}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="link" className="text-right">
+            <Label htmlFor="link" className="text-right text-xs md:text-sm">
               Link
             </Label>
             <Input
               id="name"
               defaultValue={data?.resource.link}
-              {...register("link")}
+              {...register("link", {
+                required: true,
+                minLength: 1,
+                maxLength: 50,
+              })}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="description" className="text-right">
+            <Label
+              htmlFor="description"
+              className="text-right text-xs md:text-sm"
+            >
               Description
             </Label>
             <Textarea
               id="description"
               defaultValue={data?.resource.description}
-              {...register("description")}
+              {...register("description", {
+                required: true,
+                minLength: 5,
+                maxLength: 400,
+              })}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="description" className="text-right">
+            <Label
+              htmlFor="description"
+              className="text-right text-xs md:text-sm"
+            >
               Tags
             </Label>
             <Textarea
@@ -140,7 +160,11 @@ export function EditMenu(props: Props) {
                 .map((tag) => tag.name)
                 .join(",")
                 .replace(/\s/g, "")}
-              {...register("tags")}
+              {...register("tags", {
+                required: true,
+                minLength: 5,
+                maxLength: 100,
+              })}
               className="col-span-3"
             />
           </div>
@@ -160,7 +184,7 @@ export function EditMenu(props: Props) {
               ))}
             </SelectContent>
           </Select>
-          <Button disabled={isLoadingUpdate} type="submit">
+          <Button className="font-medium" disabled={isLoadingUpdate}>
             {isLoadingUpdate ? (
               <Loading size="sm" color="currentColor" />
             ) : (
@@ -172,6 +196,7 @@ export function EditMenu(props: Props) {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
+                type="button"
                 className="flex h-8 w-8 shrink-0"
                 variant="destructive"
                 size="icon"
@@ -183,7 +208,7 @@ export function EditMenu(props: Props) {
                 )}
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className={inter.className}>
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>

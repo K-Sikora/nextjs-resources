@@ -8,6 +8,8 @@ export default authMiddleware({
     /^\/resources\/(?!add).*$/, // Exclude "/resources/add" route
     "/user/(.*)",
     "/search",
+    "/tag/(.*)",
+    "/resource/(.*)",
   ],
 });
 export const config = {
