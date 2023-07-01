@@ -165,6 +165,7 @@ export const resourceRouter = createTRPCRouter({
         title: z.string().min(1).max(50),
         tags: z.string().min(5).max(100),
         link: z.string().min(1).max(50),
+        githubLink: z.string().max(100),
         category: z.enum([
           "Packages",
           "Tools",
@@ -189,7 +190,7 @@ export const resourceRouter = createTRPCRouter({
       const tagArray = input.tags
         .split(",")
         .map((tag) => tag.trim().replace(/\s+/g, ""))
-        .filter((tag) => tag !== ""); // Remove empty tags
+        .filter((tag) => tag !== "");
 
       const resource = await ctx.prisma.nextResource.create({
         data: {
@@ -197,6 +198,7 @@ export const resourceRouter = createTRPCRouter({
           category: input.category,
           description: input.description,
           link: input.link,
+          githubLink: input.githubLink,
           title: input.title,
           categorySlug: input.categorySlug,
           tags: {
@@ -222,6 +224,7 @@ export const resourceRouter = createTRPCRouter({
         title: z.string().min(1).max(50),
         tags: z.string().min(5).max(100),
         link: z.string().min(1).max(50),
+        githubLink: z.string().max(100),
         category: z.enum([
           "Packages",
           "Tools",
@@ -250,6 +253,7 @@ export const resourceRouter = createTRPCRouter({
         title,
         tags,
         link,
+        githubLink,
         category,
         categorySlug,
       } = input;
@@ -294,6 +298,7 @@ export const resourceRouter = createTRPCRouter({
           description: description,
           title: title,
           link: link,
+          githubLink: githubLink,
           category: category,
           categorySlug: categorySlug,
           tags: {

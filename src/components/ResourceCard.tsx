@@ -5,7 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { badgeVariants } from "./ui/badge";
 import { Button, buttonVariants } from "./ui/button";
 import { SignInButton, useUser } from "@clerk/nextjs";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useToast } from "./ui/use-toast";
 import { useEffect, useState } from "react";
@@ -73,6 +78,7 @@ const ResourceCard = (props: Props) => {
               <p>{cardData.resource.title}</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg">{likeNumber}</p>
+
                 <button
                   className="flex h-8 w-8 items-center justify-center rounded-md border-2 p-1"
                   disabled={isLoading || isFetching || isLoadingLike}
@@ -143,13 +149,22 @@ const ResourceCard = (props: Props) => {
       <Card.Footer className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link
-            href={`/resource/${cardData.resource.link}`}
+            href={`/resource/${cardData.resource.title.toLowerCase()}`}
             className={buttonVariants({ variant: "default", size: "sm" })}
           >
             See details
           </Link>
           {user.isSignedIn && user.user.id === cardData.author?.id && (
-            <EditMenu cardId={cardData.resource.id} />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <EditMenu cardId={cardData.resource.id} />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Edit resource</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
         {cardData.author && (

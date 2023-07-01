@@ -57,7 +57,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
           </div>
         </div>
         <div className="col-span-4 flex flex-col gap-12 rounded-lg md:grid md:grid-cols-2 md:gap-4 md:border md:p-4">
-          <div className="rounded-lg border md:border-none">
+          <div className="">
             <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
               Favourite resources
               <AiFillHeart className="text-slate-600" size={20} />
@@ -79,7 +79,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
               )}
             </div>
           </div>
-          <div className="rounded-lg border md:border-none">
+          <div className="">
             <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
               Added resources
               <IoMdCreate className="text-slate-600" size={20} />

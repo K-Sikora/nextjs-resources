@@ -25,6 +25,7 @@ model NextResource {
   authorId    String
   likes       Like[]
   likesCount  Int       @default(0)
+  githubLink String?
   @@index([authorId])
 }
 

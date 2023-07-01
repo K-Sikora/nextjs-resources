@@ -1,15 +1,204 @@
+import { GetServerSidePropsContext } from "next";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import React from "react";
+import { prisma } from "~/server/db";
+import { FaRegDotCircle, FaStar } from "react-icons/fa";
+import Link from "next/link";
+import { badgeVariants } from "~/components/ui/badge";
+import { AiFillGithub, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
+import { useToast } from "~/components/ui/use-toast";
+import { api } from "~/utils/api";
+import { useUser } from "@clerk/nextjs";
+type Tag = {
+  id: string;
+  name: string;
+};
 
-const ResourcePage = () => {
-  const router = useRouter();
+type Data = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  tags: Tag[];
+  githubLink: string;
+  likesCount: number;
+};
+type GithubData = {
+  html_url: string;
+  owner: {
+    avatar_url: string;
+  };
+  name: string;
+  stargazers_count: number;
+  description: string;
+  open_issues_count: number;
+};
+type Props = {
+  resource: string;
+  data: Data;
+  githubData: GithubData;
+};
 
-  const { resource } = router.query;
+const ResourcePage = (props: Props) => {
+  const { toast } = useToast();
+  const user = useUser();
+  const [favorite, setFavorite] = useState(false);
+  const [likeNumber, setLikeNumber] = useState(0);
+  const context = api.useContext();
+  const { data: likeData } = api.resource.getSingle.useQuery({
+    id: props.data.id,
+  });
+  const {
+    data: userLiked,
+    isLoading: isLoadingLike,
+    isFetching,
+  } = api.like.check.useQuery({
+    resourceId: props.data.id,
+  });
+  const { mutate, isLoading } = api.like.create.useMutation({
+    onSuccess: (data) => {
+      void context.invalidate();
+    },
+  });
+
+  console.log(props.githubData);
   return (
     <div className="mx-auto min-h-screen w-full max-w-screen-xl px-4 py-12 md:py-24">
-      {resource}
+      <div className="flex flex-col flex-wrap items-center justify-between gap-6 rounded-lg border px-4 py-8 md:flex-row md:items-start md:gap-2 md:px-16">
+        <Link
+          target="_blank"
+          href={props.githubData.html_url}
+          className="flex flex-col gap-2 text-center"
+        >
+          <img
+            src={props.githubData.owner.avatar_url}
+            className="h-28 w-28 rounded-full"
+          />
+          <h3 className="text-xl font-semibold">{props.githubData.name}</h3>
+        </Link>
+        <div className="flex flex-col items-center gap-3 md:items-start">
+          <Link
+            target="_blank"
+            href={props.githubData.html_url}
+            className="duration-150 hover:text-slate-700"
+          >
+            <AiFillGithub size={32} />
+          </Link>
+          <p>{props.githubData.description}</p>
+
+          <span className="flex items-center gap-1 font-medium">
+            <FaStar />
+            {props.githubData.stargazers_count}
+          </span>
+          <span className="flex items-center gap-1 font-medium">
+            <FaRegDotCircle />
+            {props.githubData.open_issues_count}
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <button
+            className="flex h-12 w-12 items-center justify-center rounded-md border-2 p-1"
+            disabled={isLoading || isFetching || isLoadingLike}
+            onClick={() => {
+              if (user.isSignedIn) {
+                setFavorite(!favorite);
+                setLikeNumber((prev) => prev + (favorite ? -1 : 1));
+                mutate({
+                  resourceId: props.data.id,
+                  userId: user.user.id,
+                });
+              } else {
+                toast({
+                  description: "You need to be signed in to like a resource",
+                });
+              }
+            }}
+          >
+            <AnimatePresence>
+              {favorite ? (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0 }}
+                  key={1}
+                  className="relative"
+                >
+                  <AiFillHeart
+                    size={24}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0 }}
+                  key={2}
+                  className="relative"
+                >
+                  <AiOutlineHeart
+                    size={24}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+          <span>{likeData?.resource.likesCount}</span>
+        </div>
+        <div className="mt-12 flex w-full justify-start">
+          <p className="text-lg leading-relaxed">{props.data.description}</p>
+        </div>
+        <div className="mt-8 flex w-full items-start justify-start gap-3">
+          {props.data.tags.map((tag: Tag) => (
+            <Link
+              key={tag.id}
+              href={`/tag/${tag.name}`}
+              className={badgeVariants({ variant: "default" })}
+            >
+              <span className="text-sm">{tag.name}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const resource = context.params?.resource?.toString().toLowerCase();
+  const data = await prisma.nextResource.findFirst({
+    where: {
+      title: resource as string,
+    },
+    select: {
+      id: true,
+      title: true,
+      category: true,
+      description: true,
+      tags: true,
+      githubLink: true,
+      likesCount: true,
+    },
+  });
+
+  const url = data?.githubLink as string;
+  const urlWithoutProtocol = url.replace(/(^\w+:|^)\/\//, "");
+  const path = urlWithoutProtocol.split("/").slice(1).join("/");
+  const res = await fetch(`https://api.github.com/repos/${path}`);
+  const resData: GithubData = (await res.json()) as GithubData;
+  console.log(resData);
+  return {
+    props: {
+      resource: resource,
+      data: data,
+      githubData: resData,
+    },
+  };
+}
 
 export default ResourcePage;

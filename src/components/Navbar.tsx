@@ -4,6 +4,12 @@ import { Button, buttonVariants } from "./ui/button";
 import { FaPlus, FaHome } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
 import { SignOutButton } from "@clerk/nextjs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import DropdownAvatar from "~/components/DropdownAvatar";
@@ -23,17 +29,28 @@ export default function Navbar() {
           id="navbar-default"
         >
           <MobileSearchBar />
+
           {user.isSignedIn ? (
             <div className="flex items-center gap-3">
-              <Link
-                href="/resources/add"
-                className={`${buttonVariants({
-                  variant: "default",
-                  size: "icon",
-                })} flex h-8 w-8 shrink-0 items-center justify-center`}
-              >
-                <FaPlus className="w-full" />
-              </Link>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link
+                      href="/resources/add"
+                      className={`${buttonVariants({
+                        variant: "default",
+                        size: "icon",
+                      })} flex h-8 w-8 shrink-0 items-center justify-center`}
+                    >
+                      <FaPlus className="w-full" />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Add new resource</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
               <DropdownAvatar />
             </div>
           ) : (

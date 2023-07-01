@@ -9,6 +9,7 @@ export type Inputs = {
     | "Other";
   description: string;
   link: string;
+  githubLink: string;
   tags: string;
   title: string;
   categorySlug: string;

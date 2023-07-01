@@ -59,7 +59,7 @@ export default function AddResource() {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-12 px-4 py-16 md:flex-row">
-      <form className="w-full md:w-1/2" onSubmit={void handleSubmit(onSubmit)}>
+      <form className="w-full md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col gap-8">
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Title</Label>
@@ -78,7 +78,7 @@ export default function AddResource() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="link">Link</Label>
+            <Label htmlFor="link">Resource website</Label>
             <Input
               id="link"
               placeholder="resource.com"
@@ -89,6 +89,21 @@ export default function AddResource() {
                 required: true,
                 minLength: 1,
                 maxLength: 50,
+              })}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="githubLink">
+              Resource GitHub link (used to generate resource page)
+            </Label>
+            <Input
+              id="githubLink"
+              placeholder="github.com/vercel/next.js"
+              {...register("githubLink", {
+                onChange(e: React.ChangeEvent<HTMLInputElement>) {
+                  setLink(e.target.value);
+                },
+                maxLength: 100,
               })}
             />
           </div>

@@ -71,7 +71,7 @@ export function EditMenu(props: Props) {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -100,7 +100,7 @@ export function EditMenu(props: Props) {
         </SheetHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right text-xs md:text-sm">
+            <Label htmlFor="title" className="text-right text-xs md:text-sm">
               Title
             </Label>
             <Input
@@ -119,12 +119,28 @@ export function EditMenu(props: Props) {
               Link
             </Label>
             <Input
-              id="name"
+              id="link"
               defaultValue={data?.resource.link}
               {...register("link", {
                 required: true,
                 minLength: 1,
                 maxLength: 50,
+              })}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label
+              htmlFor="githubLink"
+              className="text-right text-xs md:text-sm"
+            >
+              GitHub
+            </Label>
+            <Input
+              id="githubLink"
+              defaultValue={data?.resource.githubLink || ""}
+              {...register("githubLink", {
+                maxLength: 100,
               })}
               className="col-span-3"
             />
@@ -148,10 +164,7 @@ export function EditMenu(props: Props) {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label
-              htmlFor="description"
-              className="text-right text-xs md:text-sm"
-            >
+            <Label htmlFor="tags" className="text-right text-xs md:text-sm">
               Tags
             </Label>
             <Textarea
