@@ -2,9 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "~/components/ui/button";
 
-type Props = {};
-
-const TermsAndConditions = (props: Props) => {
+const TermsAndConditions = () => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-12 text-justify md:py-24">
       <h1 className="mb-8 text-2xl font-bold md:text-4xl">
@@ -58,11 +56,11 @@ const TermsAndConditions = (props: Props) => {
           5. Disclaimer of Liability:
         </h3>
         <li>
-          The Platform provides the shared resources on an "as is" basis. It
-          does not guarantee the accuracy, reliability, or suitability of these
-          resources for your specific needs. The Platform shall not be held
-          liable for any damages, losses, or consequences arising from the use
-          or misuse of the shared resources.
+          The Platform provides the shared resources on an &quot;as is&quot;
+          basis. It does not guarantee the accuracy, reliability, or suitability
+          of these resources for your specific needs. The Platform shall not be
+          held liable for any damages, losses, or consequences arising from the
+          use or misuse of the shared resources.
         </li>
       </ul>
     </div>
