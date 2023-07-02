@@ -56,7 +56,10 @@ const Footer = () => {
               </h2>
               <ul className="font-medium text-slate-800">
                 <li className="mb-4">
-                  <Link href="#" className="text-sm font-light hover:underline">
+                  <Link
+                    href="/terms-and-conditions"
+                    className="text-sm font-light hover:underline"
+                  >
                     Terms &amp; Conditions
                   </Link>
                 </li>

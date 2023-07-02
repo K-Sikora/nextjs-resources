@@ -41,7 +41,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
         <div className="col-span-1 flex flex-col items-center justify-center gap-4 rounded-lg border py-4 text-center md:sticky md:left-0 md:top-4 md:h-96 md:py-0">
           <img
             src={data.profileImageUrl}
-            className="w-36 rounded-full border-2 border-slate-300 sm:w-24 lg:w-36"
+            className="h-36 w-36 rounded-full border-2 border-slate-300 sm:h-24 sm:w-24 lg:h-36 lg:w-36"
           />
           <h2 className="text-xl font-semibold">{data.username}</h2>
           <div className="flex flex-col items-center gap-2">

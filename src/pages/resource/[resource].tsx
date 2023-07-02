@@ -208,7 +208,7 @@ const ResourcePage = (props: Props) => {
             href={`https://${
               props.githubData.homepage || (singleData?.resource.link as string)
             }`}
-            className={`${buttonVariants({ variant: "link" })} px-0`}
+            className={buttonVariants({ variant: "link", size: "link" })}
           >
             {props.githubData.homepage || singleData?.resource.link}
           </Link>

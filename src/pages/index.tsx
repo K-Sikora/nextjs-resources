@@ -22,12 +22,11 @@ export default function Home() {
       <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-8 px-4 py-12 text-center text-black md:py-24">
         <h1 className="text-5xl font-extrabold">Next.js Resources</h1>
         <p className="text-gray-600 md:px-12">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
-          aliquid facere doloribus ipsa perspiciatis porro nostrum, repudiandae
-          facilis impedit praesentium officia eveniet corporis libero sequi,
-          magni quo ex! Quam voluptatibus dolorum saepe rerum doloremque
-          similique sequi, eveniet facere ut? Accusantium fugiat eaque magni nam
-          ducimus quis iure autem cumque aspernatur.
+          Whether you're a seasoned developer or just starting out with Next.js,
+          Next.js Resources is your one-stop destination to find the perfect
+          tools for your project's unique needs. This app is designed to be the
+          ultimate hub for developers, offering an extensive collection of
+          top-notch resources that are fully compatible with Next.js.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link href="/resources" className={buttonVariants()}>

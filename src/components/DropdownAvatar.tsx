@@ -73,8 +73,20 @@ export default function DropdownAvatar() {
               key="help_and_feedback"
               className={`${inter.className} text-sm font-medium`}
             >
-              <Link className="block w-full px-2 py-2" href="/">
-                Help & Feedback
+              <Link
+                className="block w-full px-2 py-2"
+                href="/terms-and-conditions"
+              >
+                Terms &amp; Conditions
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item
+              css={{ p: "$0" }}
+              key="account_settings"
+              className={`${inter.className} text-sm font-medium`}
+            >
+              <Link className="block w-full px-2 py-2" href="/user-settings">
+                Account Settings
               </Link>
             </Dropdown.Item>
             <Dropdown.Item

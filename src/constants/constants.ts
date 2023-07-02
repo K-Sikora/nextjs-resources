@@ -3,7 +3,7 @@ export const homepageCards = [
     id: 0,
     title: "UI Libraries",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "Pre-designed components, styles and customizable themes. Simplify development and create polished interfaces for dashboards, menus, and forms effortlessly.",
     link: "/resources/ui-libraries",
     imgUrl: "/icons/design.svg",
     slug: "ui-libraries",
@@ -13,7 +13,7 @@ export const homepageCards = [
     id: 1,
     title: "Packages",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "This category features packages from the community, offering ready-to-use functionalities to enhance your development process.",
     link: "/resources/packages",
     imgUrl: "/icons/package.svg",
     slug: "packages",
@@ -24,7 +24,7 @@ export const homepageCards = [
     id: 2,
     title: "Tools",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "Explore this category to discover the tools that will empower you to create exceptional projects with ease.",
     link: "/resources/tools",
     imgUrl: "/icons/tool.svg",
     slug: "tools",
@@ -35,7 +35,7 @@ export const homepageCards = [
     id: 3,
     title: "Starters",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "Save valuable time and quickly set up the initial structure of your projects with starters created with productivity in mind.",
     link: "/resources/starters",
     imgUrl: "/icons/starter.svg",
     slug: "starters",
@@ -46,7 +46,7 @@ export const homepageCards = [
     id: 4,
     title: "Tutorials",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "Learn from experienced developers as they share their insights, tips, and tricks to help you master Next.js.",
     link: "/resources/tutorials",
     imgUrl: "/icons/tutorial.svg",
     slug: "tutorials",
@@ -57,7 +57,7 @@ export const homepageCards = [
     id: 5,
     title: "Other",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat amet facilis aspernatur ad dolore nulla veritatis distinctio rerum qui! Nisi",
+      "Explore a wide array of resources that extend beyond the traditional categories, yet remain indispensable for your Next.js projects.",
     link: "/resources/other",
     imgUrl: "/icons/other.svg",
     slug: "other",
