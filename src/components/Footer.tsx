@@ -63,11 +63,6 @@ const Footer = () => {
                     Terms &amp; Conditions
                   </Link>
                 </li>
-                <li>
-                  <Link href="#" className="text-sm font-light hover:underline">
-                    Contact
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>

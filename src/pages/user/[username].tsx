@@ -43,7 +43,9 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
             src={data.profileImageUrl}
             className="h-36 w-36 rounded-full border-2 border-slate-300 sm:h-24 sm:w-24 lg:h-36 lg:w-36"
           />
-          <h2 className="text-xl font-semibold">{data.username}</h2>
+          <h2 className="truncate text-xl font-semibold sm:w-28 lg:w-40">
+            {data.username}
+          </h2>
           <div className="flex flex-col items-center gap-2">
             <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
               <AiFillHeart /> Liked: {userStats?.likeCount}

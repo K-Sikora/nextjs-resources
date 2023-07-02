@@ -75,7 +75,7 @@ const ResourceCard = (props: Props) => {
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
             <div className="flex w-full items-center justify-between">
-              <p>{cardData.resource.title}</p>
+              <p className="break-all">{cardData.resource.title}</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg">{likeNumber}</p>
 
@@ -101,6 +101,7 @@ const ResourceCard = (props: Props) => {
                   <AnimatePresence>
                     {favorite ? (
                       <motion.div
+                        key={1}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
@@ -111,6 +112,7 @@ const ResourceCard = (props: Props) => {
                       </motion.div>
                     ) : (
                       <motion.div
+                        key={2}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
@@ -126,7 +128,9 @@ const ResourceCard = (props: Props) => {
             </div>
           </Grid>
           <Grid xs={12}>
-            <Text css={{ color: "$accents8" }}>{cardData.resource.link}</Text>
+            <Text className="break-all" css={{ color: "$accents8" }}>
+              {cardData.resource.link}
+            </Text>
           </Grid>
         </Grid.Container>
       </Card.Header>
@@ -150,7 +154,7 @@ const ResourceCard = (props: Props) => {
             href={`/resource/${cardData.resource.title.toLowerCase()}`}
             className={buttonVariants({ variant: "default", size: "sm" })}
           >
-            See details
+            Details
           </Link>
           {user.isSignedIn && user.user.id === cardData.author?.id && (
             <TooltipProvider>
@@ -171,7 +175,9 @@ const ResourceCard = (props: Props) => {
               className="flex items-center gap-1"
               href={`/user/${cardData.author.username!}`}
             >
-              {cardData.author.username}
+              <span className="w-24 truncate text-right">
+                {cardData.author.username}
+              </span>
               <img
                 className="h-7 w-7 rounded-full"
                 src={cardData.author.profileImageUrl}

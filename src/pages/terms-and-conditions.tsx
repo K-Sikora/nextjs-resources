@@ -8,7 +8,7 @@ const TermsAndConditions = () => {
       <h1 className="mb-8 text-2xl font-bold md:text-4xl">
         Terms and Conditions
       </h1>
-      <ul>
+      <ul className="text-sm md:text-base">
         <h3 className="mb-4 text-xl font-medium">1. Resource Sharing:</h3>
         <li>
           The Platform is a website dedicated to providing a collection of
@@ -63,6 +63,16 @@ const TermsAndConditions = () => {
           use or misuse of the shared resources.
         </li>
       </ul>
+      <div className="my-8 text-left">
+        If you have any questions, please contact me at{" "}
+        <Link
+          href="mailto:kontakt@krzysztofsikora.com"
+          className={buttonVariants({ variant: "link", size: "link" })}
+        >
+          kontakt@krzysztofsikora.com
+        </Link>
+        .
+      </div>
     </div>
   );
 };
