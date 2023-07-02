@@ -18,6 +18,7 @@ import { api } from "~/utils/api";
 import { useUser } from "@clerk/nextjs";
 import { EditMenu } from "~/components/EditMenu";
 import NotFoundPage from "../404";
+import { buttonVariants } from "~/components/ui/button";
 type Tag = {
   id: string;
   name: string;
@@ -37,6 +38,7 @@ type GithubData = {
   owner: {
     avatar_url: string;
   };
+  homepage: string;
   name: string;
   full_name: string;
   stargazers_count: number;
@@ -88,21 +90,30 @@ const ResourcePage = (props: Props) => {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-screen-xl px-4 py-12 md:py-24">
-      <div className="flex flex-col flex-wrap items-start justify-between gap-6 rounded-lg border px-4 py-8 md:flex-row md:gap-4 lg:px-12">
-        <div className="flex w-full justify-between md:w-auto">
-          <Link
-            target="_blank"
-            href={props.githubData.html_url}
-            className="flex flex-col gap-2 text-center"
-          >
-            <img
-              src={props.githubData.owner.avatar_url}
-              className="h-24 w-24 rounded-full"
-            />
-            <h3 className="text-lg font-medium md:text-xl">
-              {props.githubData.full_name}
-            </h3>
-          </Link>
+      <div className="grid grid-cols-1 items-start justify-between gap-6 rounded-lg border px-4 py-8 md:grid-cols-5 md:gap-8 lg:px-12">
+        <Link
+          className="md:hidden"
+          target="_blank"
+          href={props.githubData.html_url}
+        >
+          <h3 className="font-medium md:hidden">
+            {props.githubData.full_name}
+          </h3>
+        </Link>
+        <div className="flex w-full justify-between md:col-span-1 md:w-auto">
+          <div className="flex flex-col gap-2">
+            <Link target="_blank" href={props.githubData.html_url}>
+              <img
+                src={props.githubData.owner.avatar_url}
+                className="h-24 w-24 rounded-full"
+              />
+            </Link>
+            <Link target="_blank" href={props.githubData.html_url}>
+              <h3 className="hidden font-medium md:block">
+                {props.githubData.full_name}
+              </h3>
+            </Link>
+          </div>
           <div className="flex flex-col items-end justify-between gap-4 md:hidden">
             <div className="flex flex-col items-center gap-1">
               <button
@@ -131,7 +142,6 @@ const ResourcePage = (props: Props) => {
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
                       exit={{ opacity: 0 }}
-                      key={1}
                       className="relative"
                     >
                       <AiFillHeart
@@ -145,7 +155,6 @@ const ResourcePage = (props: Props) => {
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
                       exit={{ opacity: 0 }}
-                      key={2}
                       className="relative"
                     >
                       <AiOutlineHeart
@@ -159,7 +168,7 @@ const ResourcePage = (props: Props) => {
               <span>{likeNumber}</span>
             </div>
             {singleData?.author && (
-              <h4 className="flex items-center justify-center gap-1">
+              <h4 className="flex items-center justify-center gap-1 text-lg">
                 <Link
                   className="flex items-center gap-1"
                   href={`/user/${singleData.author.username!}`}
@@ -186,7 +195,7 @@ const ResourcePage = (props: Props) => {
             )}
           </div>
         </div>
-        <div className="flex flex-col items-start gap-3 md:w-3/5">
+        <div className="flex flex-col items-start gap-1 md:col-span-3">
           <Link
             target="_blank"
             href={props.githubData.html_url}
@@ -194,8 +203,15 @@ const ResourcePage = (props: Props) => {
           >
             <AiFillGithub size={32} />
           </Link>
-          <p className="">{props.githubData.description}</p>
-
+          <p>{props.githubData.description}</p>
+          <Link
+            href={`https://${
+              props.githubData.homepage || (singleData?.resource.link as string)
+            }`}
+            className={`${buttonVariants({ variant: "link" })} px-0`}
+          >
+            {props.githubData.homepage || singleData?.resource.link}
+          </Link>
           <span className="flex items-center gap-1 font-medium">
             <FaStar />
             {props.githubData.stargazers_count}
@@ -287,17 +303,17 @@ const ResourcePage = (props: Props) => {
           )}
         </div>
 
-        <div className="mt-12 flex w-full justify-start">
-          <p className="text-lg leading-relaxed">{props.data.description}</p>
+        <div className="mt-12 flex w-full justify-start md:col-span-5">
+          <p className="leading-relaxed md:text-lg">{props.data.description}</p>
         </div>
-        <div className="mt-8 flex w-full items-start justify-start gap-3">
+        <div className="mt-8 flex w-full items-start justify-start gap-3 md:col-span-5">
           {props.data.tags.map((tag: Tag) => (
             <Link
               key={tag.id}
               href={`/tag/${tag.name}`}
               className={badgeVariants({ variant: "default" })}
             >
-              <span className="text-sm">{tag.name}</span>
+              <span className="text-sm font-medium">{tag.name}</span>
             </Link>
           ))}
         </div>
@@ -329,6 +345,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const path = urlWithoutProtocol.split("/").slice(1).join("/");
   const res = await fetch(`https://api.github.com/repos/${path}`);
   const resData: GithubData = (await res.json()) as GithubData;
+  console.log(resData);
   return {
     props: {
       status: res.status,

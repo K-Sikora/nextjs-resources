@@ -105,7 +105,6 @@ const ResourceCard = (props: Props) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
                         exit={{ opacity: 0 }}
-                        key={1}
                         className="relative"
                       >
                         <AiFillHeart className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -116,7 +115,6 @@ const ResourceCard = (props: Props) => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
                         exit={{ opacity: 0 }}
-                        key={2}
                         className="relative"
                       >
                         <AiOutlineHeart className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
