@@ -56,6 +56,7 @@ export function EditMenu(props: Props) {
           title: "Success 🎉",
           description: `Resource ${data.title} updated successfully`,
         });
+        void router.push("/resources");
       },
     });
   const { mutate: mutateDelete, isLoading: isLoadingDelete } =

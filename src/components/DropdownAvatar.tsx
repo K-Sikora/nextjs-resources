@@ -44,7 +44,7 @@ export default function DropdownAvatar() {
               className={`${inter.className} text-sm font-medium`}
             >
               <Link
-                className="block w-full px-2 py-1"
+                className="block w-full px-2 py-2"
                 href={`/user/${user.user?.username || ""}`}
               >
                 My Profile
@@ -55,7 +55,7 @@ export default function DropdownAvatar() {
               key="add_resource"
               className={`${inter.className} text-sm font-medium`}
             >
-              <Link className="block w-full px-2 py-1" href="/resources/add">
+              <Link className="block w-full px-2 py-2" href="/resources/add">
                 Add Resource
               </Link>
             </Dropdown.Item>
@@ -64,7 +64,7 @@ export default function DropdownAvatar() {
               key="view_resources"
               className={`${inter.className} text-sm font-medium`}
             >
-              <Link className="block w-full px-2 py-1" href="/resources">
+              <Link className="block w-full px-2 py-2" href="/resources">
                 View Resources
               </Link>
             </Dropdown.Item>
@@ -73,7 +73,7 @@ export default function DropdownAvatar() {
               key="help_and_feedback"
               className={`${inter.className} text-sm font-medium`}
             >
-              <Link className="block w-full px-2 py-1" href="/">
+              <Link className="block w-full px-2 py-2" href="/">
                 Help & Feedback
               </Link>
             </Dropdown.Item>
@@ -84,7 +84,7 @@ export default function DropdownAvatar() {
               className={`${inter.className} text-sm font-medium`}
             >
               <SignOutButton>
-                <button className="flex w-full px-2 font-semibold">
+                <button className="flex w-full px-2 py-2 font-semibold">
                   Log out
                 </button>
               </SignOutButton>

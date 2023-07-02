@@ -101,3 +101,14 @@ body {
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+.cl-internal-b3fm6y {
+  display: none;
+}
+.cl-footerActionLink {
+  color: black;
+  font-weight: 500;
+}
+
+.cl-footerActionLink:hover {
+  color: rgb(67, 67, 67);
+}

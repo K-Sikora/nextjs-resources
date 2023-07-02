@@ -24,10 +24,7 @@ export default function Navbar() {
           <img src="/logo.svg" className="w-10" alt="Site logo" />
         </Link>
         <SearchBar />
-        <div
-          className="flex items-center justify-end gap-3"
-          id="navbar-default"
-        >
+        <div className="flex items-center justify-end gap-3">
           <MobileSearchBar />
 
           {user.isSignedIn ? (
@@ -55,7 +52,7 @@ export default function Navbar() {
             </div>
           ) : (
             <SignInButton>
-              <Button variant="default">
+              <Button variant="default" size="sm">
                 <h4 className="flex items-center justify-center gap-2 text-base">
                   <MdLogin className="h-4 w-4" />
                   <span>Sign in</span>

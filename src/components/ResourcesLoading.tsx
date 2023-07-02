@@ -9,11 +9,11 @@ const ResourceCard = () => {
     <Card css={{ p: "$4", shadow: "none", dropShadow: "none" }}>
       <Card.Header>
         <img
-          alt="logo"
+          alt="resource"
           className="flex-shrink-0"
-          src="/logo.svg"
-          width="34px"
-          height="34px"
+          src="/resource.svg"
+          width={40}
+          height={40}
         />
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>

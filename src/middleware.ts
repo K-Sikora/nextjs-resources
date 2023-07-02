@@ -10,6 +10,8 @@ export default authMiddleware({
     "/search",
     "/tag/(.*)",
     "/resource/(.*)",
+    "/sign-in",
+    "/sign-up",
   ],
 });
 export const config = {
