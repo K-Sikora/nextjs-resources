@@ -306,14 +306,14 @@ const ResourcePage = (props: Props) => {
         <div className="mt-12 flex w-full justify-start md:col-span-5">
           <p className="leading-relaxed md:text-lg">{props.data.description}</p>
         </div>
-        <div className="mt-8 flex w-full items-start justify-start gap-3 md:col-span-5">
+        <div className="mt-8 flex w-full flex-wrap items-start justify-start gap-3 md:col-span-5">
           {props.data.tags.map((tag: Tag) => (
             <Link
               key={tag.id}
               href={`/tag/${tag.name}`}
               className={badgeVariants({ variant: "default" })}
             >
-              <span className="text-sm font-medium">{tag.name}</span>
+              {tag.name}
             </Link>
           ))}
         </div>
@@ -326,7 +326,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const resource = context.params?.resource?.toString().toLowerCase();
   const data = await prisma.nextResource.findFirst({
     where: {
-      title: resource as string,
+      id: resource as string,
     },
     select: {
       id: true,
@@ -343,7 +343,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!url) return { props: { status: 404 } };
   const urlWithoutProtocol = url.replace(/(^\w+:|^)\/\//, "");
   const path = urlWithoutProtocol.split("/").slice(1).join("/");
-  const res = await fetch(`https://api.github.com/repos/${path}`);
+  const res = await fetch(`https://api.github.com/repos/${path}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN || ""}`,
+    },
+  });
   const resData: GithubData = (await res.json()) as GithubData;
   console.log(resData);
   return {

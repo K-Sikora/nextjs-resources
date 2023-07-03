@@ -45,7 +45,9 @@ const ResourcePreview = (props: Props) => {
             </Text>
           </Grid>
           <Grid xs={12}>
-            <Text css={{ color: "$accents8" }}>{props.link}</Text>
+            <Text className="w-48 truncate" css={{ color: "$accents8" }}>
+              {props.link}
+            </Text>
           </Grid>
         </Grid.Container>
       </Card.Header>

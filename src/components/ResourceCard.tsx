@@ -15,6 +15,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useToast } from "./ui/use-toast";
 import { useEffect, useState } from "react";
 import { EditMenu } from "./EditMenu";
+import { GetServerSidePropsContext } from "next";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
 type Props = {
@@ -56,12 +57,13 @@ const ResourceCard = (props: Props) => {
       setLikeNumber(cardData.resource.likesCount);
     }
   }, [cardData.resource.likesCount]);
+
   return (
     <Card
       css={{
         p: "$4",
         shadow: props.shadowEnabled ? "" : "none",
-        dropShadow: props.shadowEnabled ? "$md" : "none",
+        dropShadow: props.shadowEnabled ? "$sm" : "none",
       }}
     >
       <Card.Header>
@@ -74,7 +76,7 @@ const ResourceCard = (props: Props) => {
         />
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
-            <div className="flex w-full items-center justify-between">
+            <div className="flex w-full items-center justify-between gap-2">
               <p className="break-all">{cardData.resource.title}</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg">{likeNumber}</p>
@@ -128,8 +130,13 @@ const ResourceCard = (props: Props) => {
             </div>
           </Grid>
           <Grid xs={12}>
-            <Text className="break-all" css={{ color: "$accents8" }}>
-              {cardData.resource.link}
+            <Text
+              className="w-48 truncate break-all lg:w-60"
+              css={{ color: "$accents8" }}
+            >
+              <Link href={cardData.resource.link}>
+                {cardData.resource.link}
+              </Link>
             </Text>
           </Grid>
         </Grid.Container>
@@ -150,12 +157,14 @@ const ResourceCard = (props: Props) => {
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link
-            href={`/resource/${cardData.resource.title.toLowerCase()}`}
-            className={buttonVariants({ variant: "default", size: "sm" })}
-          >
-            Details
-          </Link>
+          {cardData.resource.githubLink && (
+            <Link
+              href={`/resource/${cardData.resource.id}`}
+              className={buttonVariants({ variant: "default", size: "sm" })}
+            >
+              Details
+            </Link>
+          )}
           {user.isSignedIn && user.user.id === cardData.author?.id && (
             <TooltipProvider>
               <Tooltip>

@@ -164,8 +164,8 @@ export const resourceRouter = createTRPCRouter({
         description: z.string().min(5).max(400),
         title: z.string().min(1).max(50),
         tags: z.string().min(5).max(100),
-        link: z.string().min(1).max(50),
-        githubLink: z.string().max(100),
+        link: z.string().min(1).max(250),
+        githubLink: z.string().max(250),
         category: z.enum([
           "Packages",
           "Tools",
@@ -223,8 +223,8 @@ export const resourceRouter = createTRPCRouter({
         description: z.string().min(5).max(400),
         title: z.string().min(1).max(50),
         tags: z.string().min(5).max(100),
-        link: z.string().min(1).max(50),
-        githubLink: z.string().max(100),
+        link: z.string().min(1).max(250),
+        githubLink: z.string().max(250),
         category: z.enum([
           "Packages",
           "Tools",

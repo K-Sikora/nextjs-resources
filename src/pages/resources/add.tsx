@@ -78,32 +78,29 @@ export default function AddResource() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="link">Resource website</Label>
+            <Label htmlFor="link">Resource link</Label>
             <Input
               id="link"
-              placeholder="resource.com"
+              placeholder="https://nextjs.org/"
               {...register("link", {
                 onChange(e: React.ChangeEvent<HTMLInputElement>) {
                   setLink(e.target.value);
                 },
                 required: true,
                 minLength: 1,
-                maxLength: 50,
+                maxLength: 250,
               })}
             />
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="githubLink">
-              Resource GitHub link (used to generate resource page)
+              Resource GitHub link (Optional, used to generate resource page)
             </Label>
             <Input
               id="githubLink"
               placeholder="github.com/vercel/next.js"
               {...register("githubLink", {
-                onChange(e: React.ChangeEvent<HTMLInputElement>) {
-                  setLink(e.target.value);
-                },
-                maxLength: 100,
+                maxLength: 250,
               })}
             />
           </div>

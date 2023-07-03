@@ -125,7 +125,7 @@ export function EditMenu(props: Props) {
               {...register("link", {
                 required: true,
                 minLength: 1,
-                maxLength: 50,
+                maxLength: 250,
               })}
               className="col-span-3"
             />
@@ -141,7 +141,7 @@ export function EditMenu(props: Props) {
               id="githubLink"
               defaultValue={data?.resource.githubLink || ""}
               {...register("githubLink", {
-                maxLength: 100,
+                maxLength: 250,
               })}
               className="col-span-3"
             />
