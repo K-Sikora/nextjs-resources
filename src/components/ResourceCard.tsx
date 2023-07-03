@@ -77,7 +77,12 @@ const ResourceCard = (props: Props) => {
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
             <div className="flex w-full items-center justify-between gap-2">
-              <p className="break-all">{cardData.resource.title}</p>
+              <Link
+                href={`/resource/${cardData.resource.id}`}
+                className="break-all"
+              >
+                {cardData.resource.title}
+              </Link>
               <div className="flex items-center gap-2">
                 <p className="text-lg">{likeNumber}</p>
 
@@ -151,7 +156,7 @@ const ResourceCard = (props: Props) => {
         <Text className="my-2 line-clamp-3">
           {cardData.resource.description}
         </Text>
-        <div className="my-2 flex flex-wrap gap-2">
+        <div className="my-2 line-clamp-1 flex h-6 flex-wrap gap-2">
           {cardData.resource.tags?.map((tag) => (
             <Link
               key={tag.id}
