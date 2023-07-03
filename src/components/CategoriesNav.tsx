@@ -48,7 +48,7 @@ const CategoriesNav = () => {
                     Most popular:
                   </h3>
                   <div className="flex flex-wrap gap-4">
-                    {data?.slice(0, 10).map((item) => (
+                    {data?.slice(0, 5).map((item) => (
                       <Link
                         key={item.resource.id}
                         href={item.resource.link}

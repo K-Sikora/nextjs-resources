@@ -46,7 +46,7 @@ const ResourcePreview = (props: Props) => {
           </Grid>
           <Grid xs={12}>
             <Text className="w-48 truncate" css={{ color: "$accents8" }}>
-              {props.link}
+              {props.link.replace(/^(https?:\/\/)?(www\.)?/, "")}
             </Text>
           </Grid>
         </Grid.Container>

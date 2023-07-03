@@ -30,7 +30,7 @@ export const popularRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const popularResources = await ctx.prisma.nextResource.findMany({
-        take: 10,
+        take: 5,
         orderBy: {
           likesCount: "desc",
         },

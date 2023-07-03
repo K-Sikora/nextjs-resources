@@ -134,8 +134,14 @@ const ResourceCard = (props: Props) => {
               className="w-48 truncate break-all lg:w-60"
               css={{ color: "$accents8" }}
             >
-              <Link href={cardData.resource.link}>
-                {cardData.resource.link}
+              <Link
+                href={
+                  cardData.resource.link.startsWith("https://")
+                    ? cardData.resource.link
+                    : `https://${cardData.resource.link}`
+                }
+              >
+                {cardData.resource.link.replace(/^(https?:\/\/)?(www\.)?/, "")}
               </Link>
             </Text>
           </Grid>

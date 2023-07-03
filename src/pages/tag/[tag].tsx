@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import CategoriesNav from "~/components/CategoriesNav";
 import ResourceCard from "~/components/ResourceCard";
 import { RouterOutputs, api } from "~/utils/api";
+import Head from "next/head";
 
 const TagPage = () => {
   const user = useUser();
@@ -30,6 +31,9 @@ const TagPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Next.js Resources - {tag || "Tag"}</title>
+      </Head>
       <CategoriesNav />
 
       <main className="min-h-screen">

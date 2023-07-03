@@ -32,7 +32,6 @@ const SingleCategoryNavItem = (props: Props) => {
   const { data } = api.popular.getPopularByCategory.useQuery({
     category: props.slug,
   });
-  console.log("data:", data);
   return (
     <>
       <NavigationMenuItem>

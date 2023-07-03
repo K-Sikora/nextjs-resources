@@ -12,6 +12,7 @@ export default authMiddleware({
     "/resource/(.*)",
     "/sign-in",
     "/sign-up",
+    "/terms-and-conditions",
   ],
 });
 export const config = {
