@@ -32,9 +32,8 @@ const CategoriesNav = () => {
                 >
                   <h3 className="z-20 text-2xl font-semibold">All resources</h3>
                   <p className="z-20 text-sm">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Laborum nihil eveniet cum consequatur facere voluptas
-                    mollitia velit fugit facilis placeat?
+                    See every tool, library, package, starter, tutorial, and
+                    every other valuable resource available on the platform.
                   </p>
                   <div className="absolute left-0 top-0 z-10 h-full w-full rounded-xl bg-black/80 duration-200 group-hover:bg-black/60"></div>
                   <Image

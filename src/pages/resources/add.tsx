@@ -5,7 +5,7 @@ import { categories } from "~/constants/categories";
 import { useToast } from "~/components/ui/use-toast";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { Inputs } from "~/types/InputsType";
+import { Inputs } from "~/types/Inputs";
 import {
   Select,
   SelectContent,
@@ -94,11 +94,11 @@ export default function AddResource() {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="githubLink">
-              Resource GitHub link (Optional, used to generate resource page)
+              Resource GitHub link (Optional, used to fetch GitHub data)
             </Label>
             <Input
               id="githubLink"
-              placeholder="github.com/vercel/next.js"
+              placeholder="https://github.com/vercel/next.js"
               {...register("githubLink", {
                 maxLength: 250,
               })}

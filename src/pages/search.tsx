@@ -27,7 +27,7 @@ const SearchPage = () => {
     return (
       <>
         <CategoriesNav />
-        <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-6 md:grid-cols-2 md:py-12 xl:grid-cols-3">
+        <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 pb-24 pt-6 md:grid-cols-2 md:pt-12">
           {Array.from({ length: 12 }).map((_, index) => (
             <ResourcesLoading key={index} />
           ))}
@@ -44,7 +44,7 @@ const SearchPage = () => {
       </Head>
       <CategoriesNav />
       <main className="min-h-screen">
-        <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 py-6 md:grid-cols-2 md:py-12 xl:grid-cols-3">
+        <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-center gap-4 px-4 pb-24 pt-6 md:grid-cols-2 md:pt-12">
           {data?.map((item) => (
             <ResourceCard
               key={item.resource.id}

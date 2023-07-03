@@ -1,6 +1,7 @@
 import { clerkClient } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
+import { GithubData } from "~/types/GithubData";
 import {
   createTRPCRouter,
   privateProcedure,
@@ -186,7 +187,15 @@ export const resourceRouter = createTRPCRouter({
           code: "TOO_MANY_REQUESTS",
           message: "Too many requests, please wait 5 minutes and try again",
         });
-
+      const url = input.githubLink;
+      const urlWithoutProtocol = url.replace(/(^\w+:|^)\/\//, "");
+      const path = urlWithoutProtocol.split("/").slice(1).join("/");
+      const res = await fetch(`https://api.github.com/repos/${path}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN || ""}`,
+        },
+      });
+      const githubData = (await res.json()) as GithubData;
       const tagArray = input.tags
         .split(",")
         .map((tag) => tag.trim().replace(/\s+/g, ""))
@@ -200,6 +209,10 @@ export const resourceRouter = createTRPCRouter({
           link: input.link,
           githubLink: input.githubLink,
           title: input.title,
+          githubAvatar:
+            githubData.message === "Not Found"
+              ? ""
+              : githubData.owner.avatar_url,
           categorySlug: input.categorySlug,
           tags: {
             connectOrCreate: tagArray.map((tagName) => ({
@@ -246,7 +259,15 @@ export const resourceRouter = createTRPCRouter({
           code: "TOO_MANY_REQUESTS",
           message: "Too many requests, please wait 5 minutes and try again",
         });
-
+      const url = input.githubLink;
+      const urlWithoutProtocol = url.replace(/(^\w+:|^)\/\//, "");
+      const path = urlWithoutProtocol.split("/").slice(1).join("/");
+      const res = await fetch(`https://api.github.com/repos/${path}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN || ""}`,
+        },
+      });
+      const githubData = (await res.json()) as GithubData;
       const {
         resourceId,
         description,
@@ -299,6 +320,10 @@ export const resourceRouter = createTRPCRouter({
           title: title,
           link: link,
           githubLink: githubLink,
+          githubAvatar:
+            githubData.message === "Not Found"
+              ? ""
+              : githubData.owner.avatar_url,
           category: category,
           categorySlug: categorySlug,
           tags: {

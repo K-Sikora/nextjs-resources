@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { categories } from "~/constants/categories";
 import { useEffect, useState } from "react";
-import { Inputs } from "~/types/InputsType";
+import { Inputs } from "~/types/Inputs";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 

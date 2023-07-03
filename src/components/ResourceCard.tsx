@@ -69,8 +69,8 @@ const ResourceCard = (props: Props) => {
       <Card.Header>
         <img
           alt="resource"
-          className="flex-shrink-0"
-          src="/resource.svg"
+          className="flex-shrink-0 rounded-full"
+          src={cardData.resource.githubAvatar || "/resource.svg"}
           width={40}
           height={40}
         />
@@ -142,7 +142,9 @@ const ResourceCard = (props: Props) => {
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: "$2", justifyContent: "space-between" }}>
-        <Text>{cardData.resource.description}</Text>
+        <Text className="my-2 line-clamp-3">
+          {cardData.resource.description}
+        </Text>
         <div className="my-2 flex flex-wrap gap-2">
           {cardData.resource.tags?.map((tag) => (
             <Link
