@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
 import React from "react";
-import { FaPlus } from "react-icons/fa";
 import { buttonVariants } from "~/components/ui/button";
 
 const NotFoundPage = () => {

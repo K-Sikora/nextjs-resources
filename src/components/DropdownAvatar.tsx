@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import { Dropdown, Avatar, Text, Grid, User } from "@nextui-org/react";
+import { Dropdown, Avatar, Text, Grid } from "@nextui-org/react";
 import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Inter } from "next/font/google";

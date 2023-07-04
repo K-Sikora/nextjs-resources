@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React from "react";
 import { api } from "~/utils/api";
 import Head from "next/head";
@@ -10,7 +9,6 @@ import { IoMdCreate } from "react-icons/io";
 
 const UserPage: NextPage<{ username: string }> = ({ username }) => {
   const user = useUser();
-  const router = useRouter();
 
   const { data } = api.profile.getUserInfo.useQuery({
     username,
@@ -40,6 +38,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
       <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-4 px-4 py-12 text-slate-800 md:grid md:grid-cols-5 md:py-24 lg:gap-8">
         <div className="col-span-1 flex flex-col items-center justify-center gap-4 rounded-lg border py-4 text-center md:sticky md:left-0 md:top-4 md:h-96 md:py-0">
           <img
+            alt={`${data.username || ""} profile picture`}
             src={data.profileImageUrl}
             className="h-36 w-36 rounded-full border-2 border-slate-300 sm:h-24 sm:w-24 lg:h-36 lg:w-36"
           />
@@ -113,7 +112,7 @@ import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "~/server/api/root";
 import { prisma } from "~/server/db";
 import superjson from "superjson";
-import { GetStaticProps, NextPage } from "next";
+import { type GetStaticProps, type NextPage } from "next";
 import NotFoundPage from "../404";
 import ResourceCard from "~/components/ResourceCard";
 
@@ -121,7 +120,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = createServerSideHelpers({
     router: appRouter,
     ctx: { prisma, userId: null },
-    transformer: superjson, // optional - adds superjson serialization
+    transformer: superjson,
   });
   const slug = context.params?.username;
 

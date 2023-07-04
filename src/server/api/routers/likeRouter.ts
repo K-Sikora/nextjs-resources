@@ -1,5 +1,5 @@
 import { clerkClient } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/dist/types/server";
+import { type User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -16,7 +16,9 @@ const filterUserInfo = (user: User) => {
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { TRPCError } from "@trpc/server";
+
 // limit to 100 requests per 5 minutes
+
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
   limiter: Ratelimit.slidingWindow(100, "5 m"),

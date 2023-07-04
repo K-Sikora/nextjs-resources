@@ -3,7 +3,7 @@ import Head from "next/head";
 import CategoriesNav from "~/components/CategoriesNav";
 import ResourceCard from "~/components/ResourceCard";
 import ResourcesLoading from "~/components/ResourcesLoading";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 
 const Resources = () => {
   const user = useUser();

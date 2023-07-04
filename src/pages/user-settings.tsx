@@ -1,5 +1,4 @@
 import {
-  ClerkProvider,
   RedirectToSignIn,
   SignedIn,
   SignedOut,

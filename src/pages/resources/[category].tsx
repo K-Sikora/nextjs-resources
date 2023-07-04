@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import type { Category } from "@prisma/client";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import { categoriesSlug } from "~/constants/categories";
 import { useUser } from "@clerk/nextjs";
 import ResourcesLoading from "~/components/ResourcesLoading";
@@ -13,19 +12,18 @@ const CategoryPage = () => {
   const user = useUser();
   const router = useRouter();
   const { category } = router.query;
-  const { data, isLoading, isError } =
-    api.category.getResourceByCategory.useQuery(
-      {
-        category: category as
-          | "other"
-          | "packages"
-          | "tools"
-          | "tutorials"
-          | "starters"
-          | "ui-libraries",
-      },
-      { enabled: !!category }
-    );
+  const { data, isLoading } = api.category.getResourceByCategory.useQuery(
+    {
+      category: category as
+        | "other"
+        | "packages"
+        | "tools"
+        | "tutorials"
+        | "starters"
+        | "ui-libraries",
+    },
+    { enabled: !!category }
+  );
   type ResourcesOutput =
     RouterOutputs["category"]["getResourceByCategory"][number];
 

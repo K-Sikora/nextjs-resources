@@ -1,17 +1,10 @@
 import Head from "next/head";
-import { api } from "~/utils/api";
-import { SignOutButton } from "@clerk/nextjs";
-import { SignInButton } from "@clerk/nextjs";
 import { FaPlus } from "react-icons/fa";
-import { useUser } from "@clerk/nextjs";
 import { buttonVariants } from "~/components/ui/button";
 import { homepageCards } from "~/constants/constants";
 import Link from "next/link";
 import SingleCard from "~/components/Card";
 export default function Home() {
-  const user = useUser();
-  const { data } = api.resource.getAll.useQuery();
-
   return (
     <>
       <Head>

@@ -1,11 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
 import { Loading } from "@nextui-org/react";
 import { categories } from "~/constants/categories";
 import { useToast } from "~/components/ui/use-toast";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { Inputs } from "~/types/Inputs";
+import { type Inputs } from "~/types/Inputs";
 import {
   Select,
   SelectContent,
@@ -29,11 +29,7 @@ export default function AddResource() {
   const { toast } = useToast();
   const router = useRouter();
   const [currentlyChosen, setCurrentlyChosen] = useState("");
-  const {
-    mutate,
-    isLoading: isLoadingAdd,
-    error,
-  } = api.resource.create.useMutation({
+  const { mutate, isLoading: isLoadingAdd } = api.resource.create.useMutation({
     onSuccess: async () => {
       await router.push(
         `/resources/${currentlyChosen.toLowerCase().replace("_", "-")}`
@@ -49,12 +45,10 @@ export default function AddResource() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const categorySlug = data.category.toLowerCase().replace("_", "-");
-    console.log(categorySlug);
     mutate({ ...data, categorySlug });
   };
 

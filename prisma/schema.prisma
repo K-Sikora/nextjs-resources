@@ -21,6 +21,7 @@ model NextResource {
   category    Category
   categorySlug String
   tags        Tag[]
+  comments    Comment[]
   link        String    @unique
   authorId    String
   likes       Like[]
@@ -46,8 +47,16 @@ model Like {
   @@index([userId])
 }
 
-
-
+model Comment {
+  id          String        @id @default(cuid())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  text        String
+  resourceId  String
+  resource    NextResource  @relation(fields: [resourceId], references: [id])
+  authorId    String
+  @@index([resourceId])
+}
 
 enum Category {
   Tutorials

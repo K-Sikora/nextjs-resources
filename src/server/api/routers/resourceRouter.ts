@@ -1,7 +1,7 @@
 import { clerkClient } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/dist/types/server";
+import { type User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
-import { GithubData } from "~/types/GithubData";
+import { type GithubData } from "~/types/GithubData";
 import {
   createTRPCRouter,
   privateProcedure,
@@ -17,7 +17,9 @@ const filterUserInfo = (user: User) => {
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { TRPCError } from "@trpc/server";
+
 // Limit to 10 create requests per 5 minutes
+
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
   limiter: Ratelimit.slidingWindow(10, "5 m"),
@@ -25,6 +27,7 @@ const ratelimit = new Ratelimit({
 
   prefix: "@upstash/ratelimit",
 });
+
 // Limit to 20 update requests per 5 minutes
 
 const ratelimitUpdate = new Ratelimit({
@@ -340,6 +343,7 @@ export const resourceRouter = createTRPCRouter({
 
       return updatedResource;
     }),
+
   delete: privateProcedure
     .input(
       z.object({

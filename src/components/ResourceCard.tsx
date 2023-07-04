@@ -1,10 +1,10 @@
-import { Card, Grid, Loading, Text } from "@nextui-org/react";
+import { Card, Grid, Text } from "@nextui-org/react";
 import Link from "next/link";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { badgeVariants } from "./ui/badge";
-import { Button, buttonVariants } from "./ui/button";
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { buttonVariants } from "./ui/button";
+import { useUser } from "@clerk/nextjs";
 import {
   Tooltip,
   TooltipContent,
@@ -15,7 +15,6 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useToast } from "./ui/use-toast";
 import { useEffect, useState } from "react";
 import { EditMenu } from "./EditMenu";
-import { GetServerSidePropsContext } from "next";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];
 
 type Props = {
@@ -40,10 +39,8 @@ const ResourceCard = (props: Props) => {
     resourceId: cardData.resource.id,
   });
   const { mutate, isLoading } = api.like.create.useMutation({
-    onSuccess: (data) => {
-      console.log("likeData", data);
-
-      void context.invalidate();
+    onSuccess: async () => {
+      await context.invalidate();
     },
   });
 
@@ -156,12 +153,12 @@ const ResourceCard = (props: Props) => {
         <Text className="my-2 line-clamp-3">
           {cardData.resource.description}
         </Text>
-        <div className="my-2 line-clamp-1 flex h-6 flex-wrap gap-2">
+        <div className="my-2 flex flex-wrap gap-1 md:line-clamp-1 md:h-7">
           {cardData.resource.tags?.map((tag) => (
             <Link
               key={tag.id}
               href={`/tag/${tag.name}`}
-              className={badgeVariants({ variant: "outline" })}
+              className={`${badgeVariants({ variant: "outline" })} mx-1`}
             >
               {tag.name}
             </Link>
@@ -195,12 +192,13 @@ const ResourceCard = (props: Props) => {
           <h4 className="flex items-center justify-center gap-1">
             <Link
               className="flex items-center gap-1"
-              href={`/user/${cardData.author.username!}`}
+              href={`/user/${cardData.author.username || ""}`}
             >
               <span className="w-24 truncate text-right">
                 {cardData.author.username}
               </span>
               <img
+                alt={`${cardData.author.username || ""} profile picture`}
                 className="h-7 w-7 rounded-full"
                 src={cardData.author.profileImageUrl}
               />

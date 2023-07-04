@@ -4,7 +4,7 @@ import ResourcesLoading from "~/components/ResourcesLoading";
 import { useUser } from "@clerk/nextjs";
 import CategoriesNav from "~/components/CategoriesNav";
 import ResourceCard from "~/components/ResourceCard";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import Head from "next/head";
 
 const TagPage = () => {

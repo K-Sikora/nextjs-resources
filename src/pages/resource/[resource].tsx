@@ -1,5 +1,6 @@
-import { GetServerSidePropsContext } from "next";
+import { type GetServerSidePropsContext } from "next";
 import { useState, useEffect } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import React from "react";
 import { prisma } from "~/server/db";
 import {
@@ -18,14 +19,20 @@ import { api } from "~/utils/api";
 import { useUser } from "@clerk/nextjs";
 import { EditMenu } from "~/components/EditMenu";
 import NotFoundPage from "../404";
-import { buttonVariants } from "~/components/ui/button";
-import { GithubData } from "~/types/GithubData";
+import { Button, buttonVariants } from "~/components/ui/button";
+import { type GithubData } from "~/types/GithubData";
 import Head from "next/head";
+import { Textarea } from "~/components/ui/textarea";
+import Comment from "~/components/Comment";
+import { Loading } from "@nextui-org/react";
+import CommentLoading from "~/components/CommentLoading";
 type Tag = {
   id: string;
   name: string;
 };
-
+type Inputs = {
+  text: string;
+};
 type Data = {
   id: string;
   title: string;
@@ -50,18 +57,18 @@ const ResourcePage = (props: Props) => {
   const [likeNumber, setLikeNumber] = useState(0);
   const context = api.useContext();
   const { data: singleData } = api.resource.getSingle.useQuery({
-    id: props.data.id,
+    id: props.data && props.data.id,
   });
   const {
     data: userLiked,
     isLoading: isLoadingLike,
     isFetching,
   } = api.like.check.useQuery({
-    resourceId: props.data.id,
+    resourceId: props.data && props.data.id,
   });
   const { mutate, isLoading } = api.like.create.useMutation({
-    onSuccess: (data) => {
-      void context.invalidate();
+    onSuccess: async () => {
+      await context.invalidate();
     },
   });
   useEffect(() => {
@@ -74,11 +81,31 @@ const ResourcePage = (props: Props) => {
       setLikeNumber(singleData.resource.likesCount);
     }
   }, [singleData?.resource.likesCount]);
-
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<Inputs>();
   if (props.status !== 200) {
     return <NotFoundPage />;
   }
+  const { mutate: mutateComment, isLoading: isLoadingAddComment } =
+    api.comments.create.useMutation({
+      onSuccess: async () => {
+        await context.comments.getAll.invalidate();
+      },
+    });
 
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    mutateComment({
+      content: data.text,
+      resourceId: singleData?.resource.id as string,
+    });
+  };
+  const { data: comments, isLoading: isLoadingComments } =
+    api.comments.getAll.useQuery({
+      resourceId: singleData?.resource.id as string,
+    });
   return (
     <>
       <Head>
@@ -99,6 +126,7 @@ const ResourcePage = (props: Props) => {
             <div className="flex flex-col gap-2">
               <Link target="_blank" href={props.githubData.html_url}>
                 <img
+                  alt={`${singleData?.resource.title || ""} image`}
                   src={singleData?.resource.githubAvatar || "/resource.svg"}
                   className="h-24 w-24 rounded-full"
                 />
@@ -166,10 +194,13 @@ const ResourcePage = (props: Props) => {
                 <h4 className="flex items-center justify-center gap-1 text-lg">
                   <Link
                     className="flex items-center gap-1"
-                    href={`/user/${singleData.author.username!}`}
+                    href={`/user/${singleData.author.username || ""}`}
                   >
                     {singleData.author.username}
                     <img
+                      alt={`${
+                        singleData.author.username || ""
+                      } profile picture`}
                       className="h-8 w-8 rounded-full"
                       src={singleData.author.profileImageUrl}
                     />
@@ -276,9 +307,10 @@ const ResourcePage = (props: Props) => {
               <h4 className="flex items-center justify-center gap-1">
                 <Link
                   className="flex items-center gap-1 text-lg"
-                  href={`/user/${singleData.author.username!}`}
+                  href={`/user/${singleData.author.username || ""}`}
                 >
                   <img
+                    alt={`${singleData.author.username || ""} profile picture`}
                     className="h-9 w-9 rounded-full"
                     src={singleData.author.profileImageUrl}
                   />
@@ -317,6 +349,55 @@ const ResourcePage = (props: Props) => {
             ))}
           </div>
         </div>
+        <div className="mt-20 flex flex-col gap-4 rounded-xl border px-4 py-8 lg:px-12">
+          <div>
+            <h2 className="text-xl font-medium">
+              Comments {comments && `(${comments.length || 0})`}
+            </h2>
+          </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col items-start gap-4"
+          >
+            <Textarea
+              id="text"
+              {...register("text", {
+                required: true,
+                minLength: 5,
+                maxLength: 400,
+              })}
+              placeholder="Write something about this resource..."
+            />
+            <Button
+              className="flex w-full items-center justify-center gap-2 md:w-48"
+              disabled={isLoadingAddComment}
+              type="submit"
+              variant="default"
+              size="sm"
+            >
+              {isLoadingAddComment ? (
+                <Loading color="currentColor" size="xs" />
+              ) : (
+                "Add comment"
+              )}
+            </Button>
+          </form>
+          <div className="mt-4 flex flex-col gap-4">
+            {isLoadingComments && (
+              <>
+                <CommentLoading />
+                <CommentLoading />
+                <CommentLoading />
+              </>
+            )}
+
+            {comments && comments.length <= 0
+              ? ""
+              : comments?.map((comment) => (
+                  <Comment key={comment.comment.id} comment={comment} />
+                ))}
+          </div>
+        </div>
       </div>
     </>
   );
@@ -349,7 +430,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   });
   const resData: GithubData = (await res.json()) as GithubData;
-  console.log(resData);
   return {
     props: {
       status: res.status,

@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
-import { FaPlus, FaHome } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
-import { SignOutButton } from "@clerk/nextjs";
 import {
   Tooltip,
   TooltipContent,

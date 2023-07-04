@@ -1,5 +1,4 @@
-import { Card, Grid, Text } from "@nextui-org/react";
-import { RouterOutputs } from "~/utils/api";
+import { Card, Grid } from "@nextui-org/react";
 import { Skeleton } from "./ui/skeleton";
 
 import { buttonVariants } from "./ui/button";
@@ -7,7 +6,7 @@ import { buttonVariants } from "./ui/button";
 const ResourceCard = () => {
   return (
     <Card css={{ p: "$4", shadow: "none", dropShadow: "none" }}>
-      <Card.Header>
+      <Card.Header className="mt-1">
         <img
           alt="resource"
           className="flex-shrink-0"
@@ -20,13 +19,18 @@ const ResourceCard = () => {
             <Skeleton className="h-[15px] w-24 bg-slate-900/30" />
           </Grid>
           <Grid xs={12}>
-            <Skeleton className="mt-1 h-[15px] w-20 bg-slate-900/30" />
+            <Skeleton className="mt-4 h-[15px] w-20 bg-slate-900/30" />
           </Grid>
         </Grid.Container>
       </Card.Header>
-      <Card.Body css={{ py: "$2", justifyContent: "space-between", gap: "$4" }}>
+      <Card.Body
+        className="my-2"
+        css={{ py: "$2", justifyContent: "space-between", gap: "$4" }}
+      >
+        <Skeleton className="h-[20px] w-56 bg-slate-900/30" />
+        <Skeleton className="h-[20px] w-52 bg-slate-900/30" />
         <Skeleton className="h-[20px] w-48 bg-slate-900/30" />
-        <div className="my-2 flex flex-wrap gap-2">
+        <div className="mb-2 mt-4 flex flex-wrap gap-2">
           <Skeleton className="h-[15px] w-12 bg-slate-900/30" />
           <Skeleton className="h-[15px] w-12 bg-slate-900/30" />
           <Skeleton className="h-[15px] w-12 bg-slate-900/30" />
@@ -36,7 +40,7 @@ const ResourceCard = () => {
       </Card.Body>
       <Card.Footer className="flex items-center justify-between">
         <div className={buttonVariants({ variant: "default", size: "sm" })}>
-          See details
+          Details
         </div>
         <h4 className="flex items-center justify-center gap-1">
           <div className="flex items-center gap-1">

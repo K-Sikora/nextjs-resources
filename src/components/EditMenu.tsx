@@ -2,8 +2,8 @@ import { MdEditNote } from "react-icons/md";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { categories } from "~/constants/categories";
-import { useEffect, useState } from "react";
-import { Inputs } from "~/types/Inputs";
+import { useState } from "react";
+import { type Inputs } from "~/types/Inputs";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,17 +28,15 @@ import {
 } from "~/components/ui/select";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
 import { api } from "~/utils/api";
 import { Textarea } from "./ui/textarea";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { FaTrash } from "react-icons/fa";
 import { Loading } from "@nextui-org/react";
 import { useToast } from "./ui/use-toast";
@@ -73,11 +71,10 @@ export function EditMenu(props: Props) {
     register,
     handleSubmit,
 
-    formState: { errors },
+    // formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const categorySlug = data.category.toLowerCase().replace("_", "-");
-    console.log(categorySlug);
     mutate({ ...data, categorySlug, resourceId: props.cardId });
   };
 

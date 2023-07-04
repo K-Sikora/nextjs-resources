@@ -65,6 +65,7 @@ const ResourcePreview = (props: Props) => {
           <div className="flex items-center gap-1">
             {user.user?.username}
             <img
+              alt={`${user.user?.username || ""} profile picture`}
               className="h-7 w-7 rounded-full"
               src={user.user?.profileImageUrl}
             />

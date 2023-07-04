@@ -3,16 +3,12 @@ import { homepageCards } from "~/constants/constants";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "~/components/ui/navigation-menu";
 import Link from "next/link";
 import Image from "next/image";
-import { buttonVariants } from "./ui/button";
 
 import SingleCategoryNavItem from "./SingleCategoryNavItem";
 import { api } from "~/utils/api";

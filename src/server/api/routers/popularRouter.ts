@@ -1,18 +1,5 @@
-import { clerkClient } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
-import {
-  createTRPCRouter,
-  privateProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
-const filterUserInfo = (user: User) => {
-  return {
-    id: user.id,
-    username: user.username,
-    profileImageUrl: user.profileImageUrl,
-  };
-};
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const popularRouter = createTRPCRouter({
   getPopularByCategory: publicProcedure

@@ -1,5 +1,5 @@
 import { clerkClient } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/dist/types/server";
+import { type User } from "@clerk/nextjs/dist/types/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 const filterUserInfo = (user: User) => {
