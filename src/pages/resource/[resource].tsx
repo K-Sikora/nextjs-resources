@@ -355,33 +355,36 @@ const ResourcePage = (props: Props) => {
               Comments {comments && `(${comments.length || 0})`}
             </h2>
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-start gap-4"
-          >
-            <Textarea
-              id="text"
-              {...register("text", {
-                required: true,
-                minLength: 5,
-                maxLength: 400,
-              })}
-              placeholder="Write something about this resource..."
-            />
-            <Button
-              className="flex w-full items-center justify-center gap-2 md:w-48"
-              disabled={isLoadingAddComment}
-              type="submit"
-              variant="default"
-              size="sm"
+          {user.isSignedIn && (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col items-start gap-4"
             >
-              {isLoadingAddComment ? (
-                <Loading color="currentColor" size="xs" />
-              ) : (
-                "Add comment"
-              )}
-            </Button>
-          </form>
+              <Textarea
+                id="text"
+                {...register("text", {
+                  required: true,
+                  minLength: 5,
+                  maxLength: 400,
+                })}
+                placeholder="Write something about this resource..."
+              />
+              <Button
+                className="flex w-full items-center justify-center gap-2 md:w-48"
+                disabled={isLoadingAddComment}
+                type="submit"
+                variant="default"
+                size="sm"
+              >
+                {isLoadingAddComment ? (
+                  <Loading color="currentColor" size="xs" />
+                ) : (
+                  "Add comment"
+                )}
+              </Button>
+            </form>
+          )}
+
           <div className="mt-4 flex flex-col gap-4">
             {isLoadingComments && (
               <>
