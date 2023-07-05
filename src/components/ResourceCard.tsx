@@ -97,7 +97,7 @@ const ResourceCard = (props: Props) => {
                     } else {
                       toast({
                         description:
-                          "You need to be signed in to like a resource",
+                          "You need to be signed in to like a resource.",
                       });
                     }
                   }}
