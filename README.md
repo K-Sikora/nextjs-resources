@@ -17,21 +17,21 @@ Next.js Resources is a web application designed to provide a platform for managi
 
 ## Features
 
-- **User Authentication**
-- **Adding Resources**
-- **Adding to favourites, commenting on resources**
-- **Searching through resources**
-- **Editing comments/resources**
-- **Deleting comments/resources**
+- User Authentication
+- Adding Resources
+- Adding to favourites, commenting on resources
+- Searching through resources
+- Editing comments/resources
+- Deleting comments/resources
 
 ## Technologies
 
-- **React**
-- **Next.js**
-- **Tailwind CSS**
-- **TypeScript**
-- **tRPC**
-- **Zod**
-- **upstash**
-- **Prisma**
-- **MySQL**
+- React
+- Next.js
+- Tailwind CSS
+- TypeScript
+- tRPC
+- Zod
+- upstash
+- Prisma
+- MySQL
