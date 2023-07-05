@@ -6,7 +6,6 @@ export const popularRouter = createTRPCRouter({
     .input(
       z.object({
         category: z.enum([
-          "packages",
           "tools",
           "other",
           "tutorials",

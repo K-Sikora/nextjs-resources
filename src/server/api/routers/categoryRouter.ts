@@ -15,7 +15,6 @@ export const categoryRouter = createTRPCRouter({
     .input(
       z.object({
         category: z.enum([
-          "packages",
           "tools",
           "other",
           "tutorials",

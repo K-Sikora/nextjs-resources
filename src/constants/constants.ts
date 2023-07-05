@@ -9,19 +9,9 @@ export const homepageCards = [
     slug: "ui-libraries",
     coverImgUrl: "/categories/ui.jpg",
   },
+
   {
     id: 1,
-    title: "Packages",
-    description:
-      "This category features packages from the community, offering ready-to-use functionalities to enhance your development process.",
-    link: "/resources/packages",
-    imgUrl: "/icons/package.svg",
-    slug: "packages",
-
-    coverImgUrl: "/categories/packages.jpg",
-  },
-  {
-    id: 2,
     title: "Tools",
     description:
       "Explore this category to discover the tools that will empower you to create exceptional projects with ease.",
@@ -32,7 +22,7 @@ export const homepageCards = [
     coverImgUrl: "/categories/tools.jpg",
   },
   {
-    id: 3,
+    id: 2,
     title: "Starters",
     description:
       "Save valuable time and quickly set up the initial structure of your projects with starters created with productivity in mind.",
@@ -43,7 +33,7 @@ export const homepageCards = [
     coverImgUrl: "/categories/starters.jpg",
   },
   {
-    id: 4,
+    id: 3,
     title: "Tutorials",
     description:
       "Learn from experienced developers as they share their insights, tips, and tricks to help you master Next.js.",
@@ -54,7 +44,7 @@ export const homepageCards = [
     coverImgUrl: "/categories/tutorials.jpg",
   },
   {
-    id: 5,
+    id: 4,
     title: "Other",
     description:
       "Explore a wide array of resources that extend beyond the traditional categories, yet remain indispensable for your Next.js projects.",

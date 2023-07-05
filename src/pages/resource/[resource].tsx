@@ -109,7 +109,7 @@ const ResourcePage = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{`${singleData?.resource.title || "Resource"}`}</title>
+        <title>{`${props.data.title || "Resource"}`}</title>
       </Head>
       <div className="mx-auto min-h-screen w-full max-w-screen-xl px-4 py-12 md:py-24">
         <div className="grid grid-cols-1 items-start justify-between gap-6 rounded-lg border px-4 py-8 md:grid-cols-5 md:gap-8 lg:px-12">
@@ -153,7 +153,7 @@ const ResourcePage = (props: Props) => {
                     } else {
                       toast({
                         description:
-                          "You need to be signed in to like a resource",
+                          "You need to be signed in to like a resource.",
                       });
                     }
                   }}
@@ -264,7 +264,7 @@ const ResourcePage = (props: Props) => {
                   } else {
                     toast({
                       description:
-                        "You need to be signed in to like a resource",
+                        "You need to be signed in to like a resource.",
                     });
                   }
                 }}

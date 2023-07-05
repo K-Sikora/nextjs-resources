@@ -13,13 +13,7 @@ type Props = {
   link: string;
   description: string;
   coverImgUrl: string;
-  slug:
-    | "packages"
-    | "tools"
-    | "other"
-    | "tutorials"
-    | "starters"
-    | "ui-libraries";
+  slug: "tools" | "other" | "tutorials" | "starters" | "ui-libraries";
 };
 
 const SingleCategoryNavItem = (props: Props) => {

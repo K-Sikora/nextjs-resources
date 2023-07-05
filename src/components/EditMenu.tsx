@@ -52,7 +52,7 @@ export function EditMenu(props: Props) {
       onSuccess: (data) => {
         toast({
           title: "Success 🎉",
-          description: `Resource ${data.title} updated successfully`,
+          description: `Resource ${data.title} updated successfully.`,
         });
         void router.push("/resources");
       },

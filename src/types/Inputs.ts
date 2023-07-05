@@ -1,12 +1,6 @@
 export type Inputs = {
   authorId: string;
-  category:
-    | "Tutorials"
-    | "UI_Libraries"
-    | "Packages"
-    | "Tools"
-    | "Starters"
-    | "Other";
+  category: "Tutorials" | "UI_Libraries" | "Tools" | "Starters" | "Other";
   description: string;
   link: string;
   githubLink: string;

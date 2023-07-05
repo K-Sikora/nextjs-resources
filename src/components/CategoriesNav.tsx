@@ -67,7 +67,6 @@ const CategoriesNav = () => {
               title={card.title}
               slug={
                 card.slug as
-                  | "packages"
                   | "tools"
                   | "other"
                   | "tutorials"

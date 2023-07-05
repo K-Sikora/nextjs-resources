@@ -16,7 +16,6 @@ const CategoryPage = () => {
     {
       category: category as
         | "other"
-        | "packages"
         | "tools"
         | "tutorials"
         | "starters"

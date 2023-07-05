@@ -171,7 +171,6 @@ export const resourceRouter = createTRPCRouter({
         link: z.string().min(1).max(250),
         githubLink: z.string().max(250),
         category: z.enum([
-          "Packages",
           "Tools",
           "Other",
           "Tutorials",
@@ -242,7 +241,6 @@ export const resourceRouter = createTRPCRouter({
         link: z.string().min(1).max(250),
         githubLink: z.string().max(250),
         category: z.enum([
-          "Packages",
           "Tools",
           "Other",
           "Tutorials",
