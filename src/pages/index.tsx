@@ -8,10 +8,6 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta
-          name="google-site-verification"
-          content="Xn66O_5OGieK2CFpsSwviRw7zHdC89AF6JudACC5th8"
-        />
         <title>Next.js Resources</title>
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
