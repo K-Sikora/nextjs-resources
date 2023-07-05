@@ -2,6 +2,8 @@
 
 Next.js Resources is a web application designed to provide a platform for managing and sharing resources related to Next.js. It allows users to add various types of resources such as starters, tutorials, UI libraries, tools, and other related content.
 
+## You can visit the website by clicking [here](https://nextjs-resources.vercel.app/).
+
 <div style="display:flex, gap: 5px">
 <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
 <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" />
