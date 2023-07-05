@@ -29,7 +29,9 @@ const splitTagsToArray = (tags: string) => {
 const ResourcePreview = (props: Props) => {
   const user = useUser();
   return (
-    <Card css={{ p: "$6", shadow: "$xs" }}>
+    <Card
+      css={{ p: "$6", shadow: "$xs", background: "inherit", color: "inherit" }}
+    >
       <Card.Header>
         <img
           alt="logo"
@@ -40,19 +42,19 @@ const ResourcePreview = (props: Props) => {
         />
         <Grid.Container css={{ pl: "$6" }}>
           <Grid xs={12}>
-            <Text h4 css={{ lineHeight: "$xs" }}>
+            <Text h4 css={{ lineHeight: "$xs", color: "inherit" }}>
               {props.title}
             </Text>
           </Grid>
           <Grid xs={12}>
-            <Text className="w-48 truncate" css={{ color: "$accents8" }}>
+            <p className="w-48 truncate text-slate-400">
               {props.link.replace(/^(https?:\/\/)?(www\.)?/, "")}
-            </Text>
+            </p>
           </Grid>
         </Grid.Container>
       </Card.Header>
       <Card.Body css={{ py: "$2" }}>
-        <Text>{props.description}</Text>
+        <p>{props.description}</p>
         <div className="my-2 flex flex-wrap gap-2">
           {splitTagsToArray(props.tags)}
         </div>

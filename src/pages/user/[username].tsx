@@ -35,7 +35,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
         {user.isLoaded && <title>Profile page - {username}</title>}
         <meta name="description" content="Next.js Resources" />
       </Head>
-      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-4 px-4 py-12 text-slate-800 md:grid md:grid-cols-5 md:py-24 lg:gap-8">
+      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col gap-4 px-4 py-12 md:grid md:grid-cols-5 md:py-24 lg:gap-8">
         <div className="col-span-1 flex flex-col items-center justify-center gap-4 rounded-lg border py-4 text-center md:sticky md:left-0 md:top-4 md:h-96 md:py-0">
           <img
             alt={`${data.username || ""} profile picture`}
@@ -52,7 +52,7 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
             <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
               <IoMdCreate /> Added: {userStats?.createdCount}
             </h4>
-            <Link href={`https://github.com/${data.username}`}>
+            <Link target="_blank" href={`https://github.com/${data.username}`}>
               <AiFillGithub size={32} />
             </Link>
           </div>
@@ -61,7 +61,10 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
           <div className="">
             <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
               Favourite resources
-              <AiFillHeart className="text-slate-600" size={20} />
+              <AiFillHeart
+                className="text-slate-600 dark:text-slate-400"
+                size={20}
+              />
             </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingLikedResources && user.isLoaded
@@ -83,7 +86,10 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
           <div className="">
             <h3 className="flex items-center justify-center gap-2 p-4 text-xl font-medium md:p-0">
               Added resources
-              <IoMdCreate className="text-slate-600" size={20} />
+              <IoMdCreate
+                className="text-slate-600 dark:text-slate-400"
+                size={20}
+              />
             </h3>
             <div className="mt-8 flex flex-col gap-4">
               {isLoadingCreatedResources && user.isLoaded

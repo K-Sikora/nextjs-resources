@@ -74,7 +74,7 @@ export function EditComment(props: Props) {
           size="icon"
           className="flex h-8 w-8 shrink-0 items-center justify-center"
         >
-          <MdEditNote className="h-full w-full p-1 text-white" />
+          <MdEditNote className="h-full w-full p-1" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">

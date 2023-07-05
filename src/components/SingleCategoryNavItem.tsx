@@ -42,7 +42,7 @@ const SingleCategoryNavItem = (props: Props) => {
               />
             </Link>
             <div className="hidden md:col-span-2 md:block">
-              <h3 className="mb-4 text-xl font-medium text-slate-800">
+              <h3 className="mb-4 text-lg font-medium text-slate-800 dark:text-slate-100">
                 Most popular:
               </h3>
               <div className="flex flex-wrap gap-4">

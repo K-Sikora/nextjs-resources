@@ -12,9 +12,9 @@ export default function Home() {
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-8 px-4 pb-24 pt-12 text-center text-black md:pt-24">
+      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-8 px-4 pb-24 pt-12 text-center text-black dark:text-white md:pt-24">
         <h1 className="text-5xl font-extrabold">Next.js Resources</h1>
-        <p className="text-gray-600 md:px-12">
+        <p className="text-gray-600 dark:text-gray-200 md:px-12">
           Next.js Resources is your one-stop destination to find the perfect
           tools for your project&apos;s unique needs. This app is designed to be
           the ultimate hub for developers, offering an extensive collection of

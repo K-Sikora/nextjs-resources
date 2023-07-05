@@ -3,26 +3,6 @@
 @tailwind utilities;
 body {
   overflow-x: hidden;
-  background: rgb(241, 245, 249);
-  background: -moz-linear-gradient(
-    145deg,
-    rgba(241, 245, 249, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(241, 245, 249, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    145deg,
-    rgba(241, 245, 249, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(241, 245, 249, 1) 100%
-  );
-  background: linear-gradient(
-    145deg,
-    rgba(241, 245, 249, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(241, 245, 249, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f5f9",endColorstr="#f1f5f9",GradientType=1);
 }
 @layer base {
   :root {
@@ -111,4 +91,7 @@ body {
 
 .cl-footerActionLink:hover {
   color: rgb(67, 67, 67);
+}
+.nextui-c-ltVxD {
+  background: none !important;
 }

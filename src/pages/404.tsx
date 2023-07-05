@@ -11,7 +11,7 @@ const NotFoundPage = () => {
         <meta name="description" content="Next.js Resources" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-14 px-4 py-36 text-center text-black">
+      <main className="mx-auto flex min-h-screen w-full max-w-screen-xl flex-col items-center justify-start gap-14 px-4 py-36 text-center">
         <h2 className="text-3xl font-extrabold md:text-5xl">
           404 | Page not found
         </h2>

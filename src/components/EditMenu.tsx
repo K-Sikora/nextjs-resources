@@ -88,7 +88,7 @@ export function EditMenu(props: Props) {
           size="icon"
           className="flex h-8 w-8 shrink-0 items-center justify-center"
         >
-          <MdEditNote className="h-full w-full p-1 text-white" />
+          <MdEditNote className="h-full w-full p-1" />
         </Button>
       </SheetTrigger>
       <SheetContent className={`z-50 p-3 md:p-6 ${inter.className}`}>
