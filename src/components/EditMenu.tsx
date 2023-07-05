@@ -51,12 +51,12 @@ export function EditMenu(props: Props) {
   const { toast } = useToast();
   const { mutate, isLoading: isLoadingUpdate } =
     api.resource.update.useMutation({
-      onSuccess: (data) => {
+      onSuccess: async (data) => {
         toast({
           title: "Success 🎉",
           description: `Resource ${data.title} updated successfully.`,
         });
-        context.invalidate();
+        await context.invalidate();
       },
     });
   const { mutate: mutateDelete, isLoading: isLoadingDelete } =
