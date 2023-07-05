@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider>
-      <ThemeProvider attribute="class" defaultTheme="dark">
+      <ThemeProvider attribute="class" defaultTheme="light">
         <div
           className={`${inter.className} bg-gradient-to-br from-slate-50 to-slate-100 text-black dark:from-slate-900 dark:to-slate-950 dark:text-white`}
         >
