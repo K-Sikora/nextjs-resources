@@ -32,7 +32,7 @@ export const categoryRouter = createTRPCRouter({
           tags: true,
         },
         orderBy: {
-          createdAt: "desc",
+          likesCount: "desc",
         },
       });
 

@@ -84,6 +84,7 @@ const ResourcePage = (props: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     // formState: { errors },
   } = useForm<Inputs>();
   if (props.status !== 200) {
@@ -101,6 +102,7 @@ const ResourcePage = (props: Props) => {
       content: data.text,
       resourceId: singleData?.resource.id as string,
     });
+    reset();
   };
   const { data: comments, isLoading: isLoadingComments } =
     api.comments.getAll.useQuery({
@@ -229,7 +231,7 @@ const ResourcePage = (props: Props) => {
             >
               <AiFillGithub size={32} />
             </Link>
-            <p>{props.githubData.description}</p>
+
             <Link
               href={`${
                 props.githubData.homepage ||

@@ -45,6 +45,8 @@ type Props = {
   cardId: string;
 };
 export function EditMenu(props: Props) {
+  const context = api.useContext();
+
   const router = useRouter();
   const { toast } = useToast();
   const { mutate, isLoading: isLoadingUpdate } =
@@ -54,7 +56,7 @@ export function EditMenu(props: Props) {
           title: "Success 🎉",
           description: `Resource ${data.title} updated successfully.`,
         });
-        void router.push("/resources");
+        context.invalidate();
       },
     });
   const { mutate: mutateDelete, isLoading: isLoadingDelete } =
