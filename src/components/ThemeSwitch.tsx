@@ -21,7 +21,7 @@ const ThemeSwitch = () => {
       <Button
         variant="default"
         size="icon"
-        className="flex h-8 w-8 shrink-0 items-center justify-center duration-300"
+        className="flex h-7 w-7 shrink-0 items-center justify-center duration-300"
         onClick={() => {
           theme === "light" ? setTheme("dark") : setTheme("light");
         }}

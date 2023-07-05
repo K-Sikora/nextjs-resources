@@ -14,7 +14,7 @@ export default function DropdownAvatar() {
           <Dropdown.Trigger css={{ zIndex: 10 }}>
             <Avatar
               bordered
-              size="lg"
+              size="md"
               as="button"
               color="default"
               src={user.user?.profileImageUrl}

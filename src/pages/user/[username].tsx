@@ -52,7 +52,11 @@ const UserPage: NextPage<{ username: string }> = ({ username }) => {
             <h4 className="flex items-center justify-center gap-1 font-medium lg:text-lg">
               <IoMdCreate /> Added: {userStats?.createdCount}
             </h4>
-            <Link target="_blank" href={`https://github.com/${data.username}`}>
+            <Link
+              className="text-slate-500 duration-200 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              target="_blank"
+              href={`https://github.com/${data.username}`}
+            >
               <AiFillGithub size={32} />
             </Link>
           </div>

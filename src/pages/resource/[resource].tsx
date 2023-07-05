@@ -224,11 +224,7 @@ const ResourcePage = (props: Props) => {
             </div>
           </div>
           <div className="flex flex-col items-start gap-1 md:col-span-3">
-            <Link
-              target="_blank"
-              href={props.githubData.html_url}
-              className="duration-150 hover:text-slate-700"
-            >
+            <Link target="_blank" href={props.githubData.html_url}>
               <AiFillGithub size={32} />
             </Link>
 

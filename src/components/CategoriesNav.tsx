@@ -12,6 +12,7 @@ import Image from "next/image";
 
 import SingleCategoryNavItem from "./SingleCategoryNavItem";
 import { api } from "~/utils/api";
+import { Button } from "./ui/button";
 const CategoriesNav = () => {
   const { data } = api.resource.getAll.useQuery();
   return (
@@ -31,6 +32,9 @@ const CategoriesNav = () => {
                     See every tool, library, package, starter, tutorial, and
                     every other valuable resource available on the platform.
                   </p>
+                  <Button className="z-50" variant="default" size="sm">
+                    Check all
+                  </Button>
                   <div className="absolute left-0 top-0 z-10 h-full w-full rounded-xl bg-black/80 duration-200 group-hover:bg-black/60"></div>
                   <Image
                     fill

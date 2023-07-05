@@ -15,7 +15,7 @@ const MobileSearchBar = () => {
         onClick={() => setMobileSearchVisible(true)}
         variant="default"
         size="icon"
-        className="h-8 w-8 shrink-0"
+        className="h-7 w-7 shrink-0"
       >
         <FaSearch />
       </Button>

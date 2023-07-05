@@ -99,7 +99,7 @@ const Footer = () => {
             <Link
               href="https://github.com/K-Sikora/nextjs-resources"
               target="_blank"
-              className="hover dark:text-white:text-slate-900 text-slate-500 duration-200 dark:text-slate-300 dark:hover:text-white"
+              className="hover text-slate-500 duration-200 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
             >
               <AiFillGithub size={32} />
               <span className="sr-only">GitHub account</span>
