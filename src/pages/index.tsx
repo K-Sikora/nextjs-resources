@@ -35,13 +35,14 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-5 lg:grid-cols-3">
-          {homepageCards.slice(2, 5).map((card) => (
+        <div className="mt-20 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {homepageCards.slice(0, 2).map((card) => (
             <SingleCard key={card.id} {...card} />
           ))}
         </div>
-        <div className="-mt-3 grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {homepageCards.slice(0, 2).map((card) => (
+
+        <div className="-mt-3 grid grid-cols-1 gap-5 lg:grid-cols-3">
+          {homepageCards.slice(2, 5).map((card) => (
             <SingleCard key={card.id} {...card} />
           ))}
         </div>

@@ -10,7 +10,7 @@ type Props = {
 export default function SingleCard(props: Props) {
   const { title, description, link, imgUrl } = props;
   return (
-    <div className="flex w-full flex-col justify-between gap-3 rounded-xl border bg-gradient-to-tr from-slate-50 to-slate-100 p-4 text-left dark:from-slate-950 dark:to-slate-900">
+    <div className="flex w-full flex-col justify-between gap-3 rounded-xl border bg-gradient-to-tr from-slate-50 to-slate-100 p-4 text-left dark:from-slate-950 dark:to-slate-950/20">
       <div className="flex items-center">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/20">
           <img alt={title} src={imgUrl} className="h-5 w-5" />
