@@ -26,7 +26,7 @@ const MobileSearchBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 top-0 z-[999] flex h-full w-full items-center bg-white"
+            className="absolute left-0 top-0 z-[999] flex h-full w-full items-center bg-white dark:bg-slate-950"
           >
             <div className="flex h-1/2 w-full items-center justify-center border-none border-slate-800 px-4">
               <form
@@ -55,7 +55,7 @@ const MobileSearchBar = () => {
                   onClick={() => setMobileSearchVisible(false)}
                   className="absolute right-12 top-1/2 flex h-full w-8 -translate-y-1/2 items-center justify-center"
                 >
-                  <MdClose size={24} className="text-slate-900" />
+                  <MdClose size={24} />
                 </button>
               </form>
             </div>
