@@ -129,7 +129,7 @@ const ResourcePage = (props: Props) => {
               <Link target="_blank" href={props.githubData.html_url}>
                 <img
                   alt={`${singleData?.resource.title || ""} image`}
-                  src={singleData?.resource.githubAvatar || "/resource.svg"}
+                  src={singleData?.resource.githubAvatar || "/logo.svg"}
                   className="h-24 w-24 rounded-full"
                 />
               </Link>

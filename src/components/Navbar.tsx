@@ -8,36 +8,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
-import { useState, useEffect } from "react";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import { useTheme } from "next-themes";
 import DropdownAvatar from "~/components/DropdownAvatar";
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
 import ThemeSwitch from "./ThemeSwitch";
 export default function Navbar() {
-  const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
   const user = useUser();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <nav className="relative border-b-2 border-gray-200 dark:border-gray-800">
       <div className="mx-auto flex h-20 max-w-screen-xl flex-wrap items-center justify-between px-4 md:grid md:grid-cols-5">
         <Link href="/" className="flex max-w-fit items-center">
-          {theme === "dark" ? (
-            <img src="/logo-dark.svg" className="w-10" alt="Site logo" />
-          ) : (
-            <img src="/logo.svg" className="w-10" alt="Site logo" />
-          )}
+          <img
+            src="/logo.svg"
+            className="w-12 rounded-full border"
+            alt="Site logo"
+          />
         </Link>
 
         <SearchBar />

@@ -58,9 +58,9 @@ const ResourceCard = (props: Props) => {
     <div className="flex flex-col justify-between rounded-xl border p-4 shadow-lg shadow-slate-950/5 dark:shadow-slate-500/5">
       <div className="flex items-center gap-2">
         <img
-          alt="resource"
+          alt="resource image"
           className="flex-shrink-0 rounded-full"
-          src={cardData.resource.githubAvatar || "/resource.svg"}
+          src={cardData.resource.githubAvatar || "/logo.svg"}
           width={40}
           height={40}
         />

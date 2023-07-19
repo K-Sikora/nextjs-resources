@@ -33,7 +33,7 @@ const ResourcePreview = (props: Props) => {
         <img
           alt="logo"
           className="flex-shrink-0"
-          src="/resource.svg"
+          src="/logo.svg"
           width="34px"
           height="34px"
         />

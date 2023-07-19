@@ -7,7 +7,7 @@ const ResourceCard = () => {
         <img
           alt="resource"
           className="flex-shrink-0"
-          src="/resource.svg"
+          src="/logo.svg"
           width={40}
           height={40}
         />

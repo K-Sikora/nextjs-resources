@@ -1,35 +1,18 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
-import { useTheme } from "next-themes";
 
 const Footer = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
     <footer className="">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
-              {theme === "dark" ? (
-                <img
-                  src="/logo-dark.svg"
-                  className="mr-3 w-10"
-                  alt="Site logo"
-                />
-              ) : (
-                <img src="/logo.svg" className="mr-3 w-10" alt="Site logo" />
-              )}
+              <img
+                src="/logo.svg"
+                className="mr-3 w-12 rounded-full border"
+                alt="Site logo"
+              />
               <span className="text-lg">Next.js Resources</span>
             </Link>
           </div>
