@@ -1,6 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
-import { Loading } from "@nextui-org/react";
 import { categories } from "~/constants/categories";
 import { useToast } from "~/components/ui/use-toast";
 import { Input } from "~/components/ui/input";
@@ -19,6 +18,7 @@ import { Label } from "~/components/ui/label";
 import { useRouter } from "next/router";
 import ResourcePreview from "~/components/ResourcePreview";
 import Head from "next/head";
+import LoadingSpinner from "~/components/LoadingSpinner";
 
 export default function AddResource() {
   const [title, setTitle] = useState("");
@@ -161,11 +161,7 @@ export default function AddResource() {
               variant="default"
               type="submit"
             >
-              {isLoadingAdd ? (
-                <Loading size="sm" color="currentColor" />
-              ) : (
-                "Add resource"
-              )}
+              {isLoadingAdd ? <LoadingSpinner /> : "Add resource"}
             </Button>
           </div>
         </form>

@@ -24,8 +24,8 @@ import { type GithubData } from "~/types/GithubData";
 import Head from "next/head";
 import { Textarea } from "~/components/ui/textarea";
 import Comment from "~/components/Comment";
-import { Loading } from "@nextui-org/react";
 import CommentLoading from "~/components/CommentLoading";
+import LoadingSpinner from "~/components/LoadingSpinner";
 type Tag = {
   id: string;
   name: string;
@@ -374,11 +374,7 @@ const ResourcePage = (props: Props) => {
                 variant="default"
                 size="sm"
               >
-                {isLoadingAddComment ? (
-                  <Loading color="currentColor" size="xs" />
-                ) : (
-                  "Add comment"
-                )}
+                {isLoadingAddComment ? <LoadingSpinner /> : "Add comment"}
               </Button>
             </form>
           )}

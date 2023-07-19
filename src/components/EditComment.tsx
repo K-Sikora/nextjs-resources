@@ -26,9 +26,9 @@ import {
 } from "~/components/ui/popover";
 import { Textarea } from "./ui/textarea";
 import { type RouterOutputs, api } from "~/utils/api";
-import { Loading } from "@nextui-org/react";
 import { useToast } from "./ui/use-toast";
 import { FaTrash } from "react-icons/fa";
+import LoadingSpinner from "./LoadingSpinner";
 type CommentOutput = RouterOutputs["comments"]["getAll"][number];
 
 type Props = {
@@ -107,11 +107,7 @@ export function EditComment(props: Props) {
                 variant="default"
                 size="sm"
               >
-                {isLoadingUpdateComment ? (
-                  <Loading color="currentColor" size="xs" />
-                ) : (
-                  "Save"
-                )}
+                {isLoadingUpdateComment ? <LoadingSpinner /> : "Save"}
               </Button>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -121,11 +117,7 @@ export function EditComment(props: Props) {
                     variant="destructive"
                     size="icon"
                   >
-                    {isLoadingDeleteComment ? (
-                      <Loading size="xs" color="currentColor" />
-                    ) : (
-                      <FaTrash />
-                    )}
+                    {isLoadingDeleteComment ? <LoadingSpinner /> : <FaTrash />}
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className={inter.className}>

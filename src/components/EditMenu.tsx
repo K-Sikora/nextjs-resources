@@ -38,9 +38,10 @@ import { api } from "~/utils/api";
 import { Textarea } from "./ui/textarea";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FaTrash } from "react-icons/fa";
-import { Loading } from "@nextui-org/react";
+
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/router";
+import LoadingSpinner from "./LoadingSpinner";
 type Props = {
   cardId: string;
 };
@@ -199,11 +200,7 @@ export function EditMenu(props: Props) {
             </SelectContent>
           </Select>
           <Button className="font-medium" disabled={isLoadingUpdate}>
-            {isLoadingUpdate ? (
-              <Loading size="sm" color="currentColor" />
-            ) : (
-              "Update resource"
-            )}
+            {isLoadingUpdate ? <LoadingSpinner /> : "Update resource"}
           </Button>
         </form>
         <div className="mt-5 flex justify-center">
@@ -215,11 +212,7 @@ export function EditMenu(props: Props) {
                 variant="destructive"
                 size="icon"
               >
-                {isLoadingDelete ? (
-                  <Loading size="xs" color="currentColor" />
-                ) : (
-                  <FaTrash />
-                )}
+                {isLoadingDelete ? <LoadingSpinner /> : <FaTrash />}
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent className={inter.className}>

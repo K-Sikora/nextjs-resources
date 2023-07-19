@@ -1,4 +1,3 @@
-import { Grid, Text } from "@nextui-org/react";
 import { buttonVariants } from "~/components/ui/button";
 import Link from "next/link";
 type Props = {
@@ -15,11 +14,11 @@ export default function SingleCard(props: Props) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 shadow-md shadow-slate-900/20">
           <img alt={title} src={imgUrl} className="h-5 w-5" />
         </div>
-        <Grid.Container css={{ pl: "$6" }}>
-          <Grid xs={12}>
+        <div className="p-6">
+          <div>
             <h3 className="font-semibold md:text-lg">{title}</h3>
-          </Grid>
-        </Grid.Container>
+          </div>
+        </div>
       </div>
       <div>
         <p>{description}</p>

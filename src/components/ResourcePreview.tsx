@@ -1,4 +1,3 @@
-import { Card, Grid, Text } from "@nextui-org/react";
 import { badgeVariants } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
 import { useUser } from "@clerk/nextjs";
@@ -29,10 +28,8 @@ const splitTagsToArray = (tags: string) => {
 const ResourcePreview = (props: Props) => {
   const user = useUser();
   return (
-    <Card
-      css={{ p: "$6", shadow: "$xs", background: "inherit", color: "inherit" }}
-    >
-      <Card.Header>
+    <div className="flex flex-col justify-between rounded-xl border p-4 shadow-lg shadow-slate-950/5 dark:shadow-slate-500/5">
+      <div className="flex items-center gap-2">
         <img
           alt="logo"
           className="flex-shrink-0"
@@ -40,26 +37,24 @@ const ResourcePreview = (props: Props) => {
           width="34px"
           height="34px"
         />
-        <Grid.Container css={{ pl: "$6" }}>
-          <Grid xs={12}>
-            <Text h4 css={{ lineHeight: "$xs", color: "inherit" }}>
-              {props.title}
-            </Text>
-          </Grid>
-          <Grid xs={12}>
+        <div className="">
+          <div>
+            <p>{props.title}</p>
+          </div>
+          <div>
             <p className="w-48 truncate text-slate-400">
               {props.link.replace(/^(https?:\/\/)?(www\.)?/, "")}
             </p>
-          </Grid>
-        </Grid.Container>
-      </Card.Header>
-      <Card.Body css={{ py: "$2" }}>
+          </div>
+        </div>
+      </div>
+      <div className="py-2">
         <p>{props.description}</p>
         <div className="my-2 flex flex-wrap gap-2">
           {splitTagsToArray(props.tags)}
         </div>
-      </Card.Body>
-      <Card.Footer className="flex items-center justify-between">
+      </div>
+      <div className="flex items-center justify-between">
         <button className={buttonVariants({ variant: "default", size: "sm" })}>
           See details
         </button>
@@ -73,8 +68,8 @@ const ResourcePreview = (props: Props) => {
             />
           </div>
         </h4>
-      </Card.Footer>
-    </Card>
+      </div>
+    </div>
   );
 };
 
