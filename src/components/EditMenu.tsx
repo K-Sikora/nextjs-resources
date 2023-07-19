@@ -1,5 +1,5 @@
 import { MdEditNote } from "react-icons/md";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
 import { categories } from "~/constants/categories";
 import { useState } from "react";
@@ -83,13 +83,14 @@ export function EditMenu(props: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant="default"
-          size="icon"
-          className="flex h-8 w-8 shrink-0 items-center justify-center"
+        <div
+          className={` ${buttonVariants({
+            size: "icon",
+            variant: "default",
+          })} flex h-8 w-8 shrink-0 items-center justify-center`}
         >
           <MdEditNote className="h-full w-full p-1" />
-        </Button>
+        </div>
       </SheetTrigger>
       <SheetContent className={`z-50 p-3 md:p-6 ${inter.className}`}>
         <SheetHeader>

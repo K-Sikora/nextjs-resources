@@ -11,10 +11,12 @@ const SearchBar = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void router.push({
-            pathname: "/search",
-            query: { q: query },
-          });
+          if (query.length > 0) {
+            void router.push({
+              pathname: "/search",
+              query: { q: query },
+            });
+          }
         }}
         className="relative w-96"
       >

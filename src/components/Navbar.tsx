@@ -54,7 +54,7 @@ export default function Navbar() {
                       className={`${buttonVariants({
                         variant: "default",
                         size: "icon",
-                      })} flex h-7 w-7 shrink-0 items-center justify-center`}
+                      })} flex h-8 w-8 shrink-0 items-center justify-center`}
                     >
                       <FaPlus className="w-full" />
                     </Link>

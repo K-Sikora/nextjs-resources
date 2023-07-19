@@ -15,7 +15,7 @@ const MobileSearchBar = () => {
         onClick={() => setMobileSearchVisible(true)}
         variant="default"
         size="icon"
-        className="h-7 w-7 shrink-0"
+        className="h-8 w-8 shrink-0"
       >
         <FaSearch />
       </Button>
@@ -32,10 +32,12 @@ const MobileSearchBar = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  void router.push({
-                    pathname: "/search",
-                    query: { q: query },
-                  });
+                  if (query.length > 0) {
+                    void router.push({
+                      pathname: "/search",
+                      query: { q: query },
+                    });
+                  }
                 }}
                 className="relative h-full w-full"
               >
