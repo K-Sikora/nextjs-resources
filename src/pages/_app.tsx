@@ -5,9 +5,9 @@ import { ThemeProvider } from "next-themes";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
-import Navbar from "~/components/layout/Navbar/Navbar";
+import Navbar from "~/components/Layout/Navbar/Navbar";
 import { Toaster } from "~/components/ui/toaster";
-import Footer from "~/components/layout/Footer/Footer";
+import Footer from "~/components/Layout/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const MyApp: AppType = ({ Component, pageProps }) => {

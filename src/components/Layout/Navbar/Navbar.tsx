@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/tooltip";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import DropdownAvatar from "~/components/layout/Navbar/DropdownAvatar";
+import DropdownAvatar from "./DropdownAvatar";
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
 import ThemeSwitch from "./ThemeSwitch";
