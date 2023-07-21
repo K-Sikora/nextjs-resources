@@ -2,7 +2,7 @@ import React from "react";
 import { api } from "~/utils/api";
 import Head from "next/head";
 import Link from "next/link";
-import ResourcesLoading from "~/components/ResourcesLoading";
+import ResourcesLoading from "~/components/Loading/ResourcesLoading";
 import { useUser } from "@clerk/nextjs";
 import { AiFillGithub, AiFillHeart } from "react-icons/ai";
 import { IoMdCreate } from "react-icons/io";
@@ -124,7 +124,7 @@ import { prisma } from "~/server/db";
 import superjson from "superjson";
 import { type GetStaticProps, type NextPage } from "next";
 import NotFoundPage from "../404";
-import ResourceCard from "~/components/ResourceCard";
+import ResourceCard from "~/components/Resource/ResourceCard";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const ssg = createServerSideHelpers({

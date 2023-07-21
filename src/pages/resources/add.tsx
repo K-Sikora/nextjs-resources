@@ -18,7 +18,7 @@ import { Label } from "~/components/ui/label";
 import { useRouter } from "next/router";
 import ResourcePreview from "~/components/ResourcePreview";
 import Head from "next/head";
-import LoadingSpinner from "~/components/LoadingSpinner";
+import LoadingSpinner from "~/components/Loading/LoadingSpinner";
 
 export default function AddResource() {
   const [title, setTitle] = useState("");

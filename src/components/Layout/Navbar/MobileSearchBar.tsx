@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
 import { FaSearch } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";

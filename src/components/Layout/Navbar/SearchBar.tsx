@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "./ui/input";
+import { Input } from "../../ui/input";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/router";
 

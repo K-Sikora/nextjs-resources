@@ -2,7 +2,6 @@ import Head from "next/head";
 import { FaPlus } from "react-icons/fa";
 import { buttonVariants } from "~/components/ui/button";
 import { homepageCards } from "~/constants/constants";
-import { RedirectToSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import SingleCard from "~/components/Card";
 export default function Home() {

@@ -3,8 +3,8 @@ import React from "react";
 import { type RouterOutputs, api } from "~/utils/api";
 import { categoriesSlug } from "~/constants/categories";
 import { useUser } from "@clerk/nextjs";
-import ResourcesLoading from "~/components/ResourcesLoading";
-import ResourceCard from "~/components/ResourceCard";
+import ResourcesLoading from "~/components/Loading/ResourcesLoading";
+import ResourceCard from "~/components/Resource/ResourceCard";
 import Head from "next/head";
 import CategoriesNav from "~/components/CategoriesNav";
 

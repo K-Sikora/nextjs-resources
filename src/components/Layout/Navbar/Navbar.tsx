@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "../../ui/button";
 import { FaPlus } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
 import {
@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/tooltip";
 import { SignInButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import DropdownAvatar from "~/components/DropdownAvatar";
+import DropdownAvatar from "~/components/layout/Navbar/DropdownAvatar";
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
 import ThemeSwitch from "./ThemeSwitch";

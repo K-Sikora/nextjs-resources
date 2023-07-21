@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { type RouterOutputs, api } from "~/utils/api";
 import { motion, AnimatePresence } from "framer-motion";
-import { badgeVariants } from "./ui/badge";
-import { buttonVariants } from "./ui/button";
+import { badgeVariants } from "../ui/badge";
+import { buttonVariants } from "../ui/button";
 import { useUser } from "@clerk/nextjs";
 import {
   Tooltip,
@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 import { useEffect, useState } from "react";
 import { EditMenu } from "./EditMenu";
 type ResourcesOutput = RouterOutputs["resource"]["getAll"][number];

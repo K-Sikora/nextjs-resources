@@ -13,7 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
+} from "../ui/alert-dialog";
 type Inputs = {
   text: string;
 };
@@ -24,11 +24,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "../ui/textarea";
 import { type RouterOutputs, api } from "~/utils/api";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 import { FaTrash } from "react-icons/fa";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 type CommentOutput = RouterOutputs["comments"]["getAll"][number];
 
 type Props = {

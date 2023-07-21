@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React from "react";
-import ResourcesLoading from "~/components/ResourcesLoading";
+import ResourcesLoading from "~/components/Loading/ResourcesLoading";
 import { useUser } from "@clerk/nextjs";
 import CategoriesNav from "~/components/CategoriesNav";
-import ResourceCard from "~/components/ResourceCard";
+import ResourceCard from "~/components/Resource/ResourceCard";
 import { type RouterOutputs, api } from "~/utils/api";
 import Head from "next/head";
 

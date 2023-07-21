@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false);

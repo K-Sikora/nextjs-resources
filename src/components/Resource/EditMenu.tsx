@@ -1,13 +1,13 @@
 import { MdEditNote } from "react-icons/md";
-import { Button, buttonVariants } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button, buttonVariants } from "../ui/button";
+import { Input } from "../ui/input";
 import { categories } from "~/constants/categories";
 import { useState } from "react";
 import { type Inputs } from "~/types/Inputs";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,7 +18,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
+} from "../ui/alert-dialog";
 import {
   Select,
   SelectContent,
@@ -33,15 +33,15 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
+} from "../ui/sheet";
 import { api } from "~/utils/api";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "../ui/textarea";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { FaTrash } from "react-icons/fa";
 
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/router";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../Loading/LoadingSpinner";
 type Props = {
   cardId: string;
 };

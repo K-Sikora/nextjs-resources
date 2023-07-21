@@ -3,8 +3,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import CategoriesNav from "~/components/CategoriesNav";
-import ResourceCard from "~/components/ResourceCard";
-import ResourcesLoading from "~/components/ResourcesLoading";
+import ResourceCard from "~/components/Resource/ResourceCard";
+import ResourcesLoading from "~/components/Loading/ResourcesLoading";
 import { api } from "~/utils/api";
 
 const SearchPage = () => {
